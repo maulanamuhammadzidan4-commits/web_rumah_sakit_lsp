@@ -1,0 +1,73 @@
+<header id="header" class="header sticky-top">
+
+    <div class="topbar d-flex align-items-center">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">lokanandars1@gmail.com</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+62 856-1234-5678</span></i>
+        </div>
+        <div class="social-links d-none d-md-flex align-items-center">
+          <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+    </div><!-- End Top Bar -->
+
+    <div class="branding d-flex align-items-center">
+
+  <div class="container position-relative d-flex align-items-center justify-content-between">
+    <!-- Logo -->
+    <a href="index.html" class="logo d-flex align-items-center me-auto">
+      <h1 class="sitename">Lokananda</h1>
+    </a>
+
+    <!-- Navigation Menu -->
+    <nav id="navmenu" class="navmenu order-last order-xl-0">
+      <ul>
+        <li><a href="#hero" class="active">Home<br></a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Layanan</a></li>
+        <li><a href="#departments">Departemen</a></li>
+        <li><a href="#doctors">Dokter</a></li>
+        <li class="dropdown"><a href="#"><span>Layanan lain</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <ul>
+            <li><a href="#">Artikel kesehatan</a></li>
+            <li class="dropdown"><a href="#"><span>Departemen</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="#">Kardiologi</a></li>
+                <li><a href="#">Neurologi</a></li>
+                <li><a href="#">Hepatologi</a></li>
+                <li><a href="#">Pediatri</a></li>
+                <li><a href="#">Klinik mata</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Chat Dokter</a></li>
+            <li><a href="#">Jadwal praktek</a></li>
+            <li><a href="#">Obat</a></li>
+            <li><a href="pages/room.html">Kamar</a></li>
+          </ul>
+        </li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    </nav>
+
+    <!-- Header Action Buttons (IGD & Janji Temu) -->
+    <div class="header-action-btns d-flex align-items-center gap-2 ms-3 order-2 order-xl-last">
+      <!-- Tombol IGD -->
+      <a class="btn-igd" href="pages/igd.html">
+        <i class="bi bi-telephone-fill me-1"></i>
+        <span>IGD</span>
+      </a>
+
+      <!-- Tombol Buat Janji Temu -->
+      <a class="cta-btn" href="#appointment">Janji Temu</a>
+    </div>
+
+  </div>
+
+</div>
+
+  </header>

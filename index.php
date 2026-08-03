@@ -39,78 +39,7 @@
 
 <body class="index-page">
 
-  <header id="header" class="header sticky-top">
-
-    <div class="topbar d-flex align-items-center">
-      <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="contact-info d-flex align-items-center">
-          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">lokanandars1@gmail.com</a></i>
-          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+62 856-1234-5678</span></i>
-        </div>
-        <div class="social-links d-none d-md-flex align-items-center">
-          <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-        </div>
-      </div>
-    </div><!-- End Top Bar -->
-
-    <div class="branding d-flex align-items-center">
-
-  <div class="container position-relative d-flex align-items-center justify-content-between">
-    <!-- Logo -->
-    <a href="index.html" class="logo d-flex align-items-center me-auto">
-      <h1 class="sitename">Lokananda</h1>
-    </a>
-
-    <!-- Navigation Menu -->
-    <nav id="navmenu" class="navmenu order-last order-xl-0">
-      <ul>
-        <li><a href="#hero" class="active">Home<br></a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Layanan</a></li>
-        <li><a href="#departments">Departemen</a></li>
-        <li><a href="#doctors">Dokter</a></li>
-        <li class="dropdown"><a href="#"><span>Layanan lain</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-          <ul>
-            <li><a href="#">Artikel kesehatan</a></li>
-            <li class="dropdown"><a href="#"><span>Departemen</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="#">Kardiologi</a></li>
-                <li><a href="#">Neurologi</a></li>
-                <li><a href="#">Hepatologi</a></li>
-                <li><a href="#">Pediatri</a></li>
-                <li><a href="#">Klinik mata</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Chat Dokter</a></li>
-            <li><a href="#">Jadwal praktek</a></li>
-            <li><a href="#">Obat</a></li>
-          </ul>
-        </li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-    </nav>
-
-    <!-- Header Action Buttons (IGD & Janji Temu) -->
-    <div class="header-action-btns d-flex align-items-center gap-2 ms-3 order-2 order-xl-last">
-      <!-- Tombol IGD -->
-      <a class="btn-igd" href="tel:119">
-        <i class="bi bi-telephone-fill me-1"></i>
-        <span>IGD</span>
-      </a>
-
-      <!-- Tombol Buat Janji Temu -->
-      <a class="cta-btn" href="#appointment">Janji Temu</a>
-    </div>
-
-  </div>
-
-</div>
-
-  </header>
+  <?php include 'components/header.php'; ?>
 
   <main class="main">
 
@@ -1001,80 +930,10 @@
 
   </main>
 
-  <footer id="footer" class="footer light-background">
-
-    <div class="container footer-top">
-      <div class="row gy-4">
-        <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">RS Lokananda</span>
-          </a>
-          <div class="footer-contact pt-3">
-            <p>Jl. Pulang No. 05, Majalengka</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+62 856-1234-5678</span></p>
-            <p><strong>Email:</strong> <span>lokanandars1@gmail.com</span></p>
-          </div>
-          <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Link Berguna</h4>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Tentang Kami</a></li>
-            <li><a href="#">Layanan</a></li>
-            <li><a href="#">Syarat Layanan</a></li>
-            <li><a href="#">Kebijakan Privasi</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Layanan Kami</h4>
-          <ul>
-            <li><a href="#">Artikel kesehatan</a></li>
-            <li><a href="#">Obat</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Sumber</h4>
-          <ul>
-            <li><a href="https://themewagon.com/themes/medilab/">Medilab Theme</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Web berguna</h4>
-          <ul>
-            <li><a href="https://bootstrapmade.com/">BootstrapMade</a></li>
-            <li><a href="https://themewagon.com">ThemeWagon</a></li>
-            <li><a href="https://rsudmajalengka.co.id/">RSUD Majalengka</a></li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="container copyright text-center mt-4">
-      <p>&copy; <span>Copyright</span> <strong class="px-1 sitename">RS Lokananda</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
-      </div>
-    </div>
-
-  </footer>
+<?php include 'components/footer.php'; ?>
 
   <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<?php include 'components/scroll-top.php'; ?>
 
   <!-- Preloader -->
   <div id="preloader"></div>
