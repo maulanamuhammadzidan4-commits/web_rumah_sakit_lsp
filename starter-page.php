@@ -39,7 +39,7 @@
 
 <body class="starter-page-page">
 
-<?php include 'components/header.php'; ?>
+<?php include 'frontend/components/header.php'; ?>
 
   <main class="main">
 
@@ -82,10 +82,10 @@
 
   </main>
 
-<?php include 'components/footer.php'; ?>
+<?php include 'frontend/components/footer.php'; ?>
 
   <!-- Scroll Top -->
-<?php include 'components/scroll-top.php'; ?>
+<?php include 'frontend/components/scroll-top.php'; ?>
 
   <!-- Preloader -->
   <div id="preloader"></div>

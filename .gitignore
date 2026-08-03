@@ -1,2 +1,4 @@
 .env
 Readme.txt
+vendor
+composer.lock
