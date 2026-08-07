@@ -51,8 +51,8 @@
       <div class="container position-relative">
 
         <div class="welcome position-relative" data-aos="fade-down" data-aos-delay="100">
-          <h2>RS Lokananda</h2>
-          <p>Kesehatan Anda nomor satu</p>
+          <h2>RSUD Majalengka</h2>
+          <p>Kesehatan Anda prioritas kami</p>
         </div><!-- End Welcome -->
 
         <div class="content row gy-4">
