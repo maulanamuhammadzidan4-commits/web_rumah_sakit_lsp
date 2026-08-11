@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../config.php';
     <div class="container position-relative d-flex align-items-center justify-content-between">
       <!-- Logo -->
       <a href="<?= BASE_URL; ?>frontend/home.php" class="logo d-flex align-items-center me-auto">
-        <img src="<?= BASE_URL; ?>assets/img/logo.png" alt="logo" class="logo-img me-2">
+        <img src="<?= BASE_URL; ?>frontend/assets/img/logo.png" alt="logo" class="logo-img me-2">
         <div class="brand-text d-flex flex-column align-items-start">
           <span class="sitename title-main">RSUD Majalengka</span>
           <span class="sitename title-sub">Kabupaten Majalengka</span>
@@ -69,7 +69,7 @@ require_once __DIR__ . '/../../config.php';
           <span>IGD</span>
         </a>
 
-        <a class="cta-btn" id="register" href="#">Login</a>
+        <a class="cta-btn" id="register" href="<?= BASE_URL ?>frontend/pages/login-page.php">Login</a>
 
         <!-- Tombol Buat Janji Temu -->
         <a class="cta-btn" href="<?= BASE_URL; ?>frontend/home.php#appointment">Janji Temu</a>
