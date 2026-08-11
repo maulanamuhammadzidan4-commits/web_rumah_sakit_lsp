@@ -49,13 +49,13 @@
     </section><!-- /Starter Section Section -->
 
     <section id="login">
+    <div class="login-card">
       <div id="login-container"></div>
-      <div id="daftar-akun">
-        <p>Belum punya akun? <a href="#login" onclick="reg()">Buat akun</a></p>
+      <div class="alter">
+        <p id="daftar">Belum punya akun? <a href="javascript:void(0)" onclick="reg()">Register</a></p>
+        <p id="masuk" style="display: none;">Sudah punya akun? <a href="javascript:void(0)" onclick="masuk()">Login</a></p>
       </div>
-      <div id="masuk" style="display: none;">
-        <p>Sudah punya akun? <a href="#login" onclick="masuk()">Masuk</a></p>
-      </div>
+    </div>
     </section>
 
   </main>
@@ -71,21 +71,28 @@
   <?php include 'frontend/components/js.php' ?>
 
   <script>
-    const login = `<?php include 'frontend/components/log-form.php' ?>`;
-    const daftar = `<?php include 'frontend/components/reg-form.php' ?>`;
+    const login = `<?php include '../components/log-form.php' ?>`;
+    const daftar = `<?php include '../components/reg-form.php' ?>`;
 
-    document.getElementById('login-container').innerHTML = login;
+    const loginContainer = document.getElementById('login-container');
+    const elemDaftar = document.getElementById('daftar');
+    const elemMasuk = document.getElementById('masuk');
 
-    function reg(){
-      document.getElementById('login-container').innerHTML = daftar;
-      document.getElementById('daftar-akun').style.display = 'none';
-      document.getElementById('masuk').style.display = 'block';
+    // Render awal
+    loginContainer.innerHTML = login;
+
+    function reg() {
+      loginContainer.innerHTML = daftar;
+      elemDaftar.style.display = 'none';
+      elemMasuk.style.display = 'block';
+      elemMasuk.style.animation = 'fadeInUp 0.3s ease forwards';
     }
 
     function masuk() {
-      document.getElementById('login-container').innerHTML = login;
-      document.getElementById('daftar-akun').style.display = 'block';
-      document.getElementById('masuk').style.display = 'none';
+      loginContainer.innerHTML = login;
+      elemMasuk.style.display = 'none';
+      elemDaftar.style.display = 'block';
+      elemDaftar.style.animation = 'fadeInUp 0.3s ease forwards';
     }
   </script>
 

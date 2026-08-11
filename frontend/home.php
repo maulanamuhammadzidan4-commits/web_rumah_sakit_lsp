@@ -26,9 +26,9 @@
         <div class="content row gy-4">
           <div class="col-lg-4 d-flex align-items-stretch">
             <div class="why-box" data-aos="zoom-out" data-aos-delay="200">
-              <h3>Kenapa Lokananda?</h3>
+              <h3>Kenapa RSUD Majalengka?</h3>
               <p>
-                Lokananda adalah rumah sakit yang dipercaya selama puluhan tahun. Dengan layanan-layanan kesehatan yang lengkap.
+                RSUD Majalengka adalah rumah sakit yang dipercaya selama puluhan tahun. Dengan layanan-layanan kesehatan yang lengkap.
                 Dengan dokter-dokter yang berpengalaman di bidangnya, membuat rumah sakit ini terpercaya.
                 Berokasi di Jl. Pulang Majalengka.
               </p>

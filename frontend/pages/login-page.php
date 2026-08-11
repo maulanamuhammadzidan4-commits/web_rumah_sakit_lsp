@@ -25,18 +25,25 @@
     const login = `<?php include '../components/log-form.php' ?>`;
     const daftar = `<?php include '../components/reg-form.php' ?>`;
 
-    document.getElementById('login-container').innerHTML = login;
+    const loginContainer = document.getElementById('login-container');
+    const elemDaftar = document.getElementById('daftar');
+    const elemMasuk = document.getElementById('masuk');
+
+    // Render awal
+    loginContainer.innerHTML = login;
 
     function reg() {
-      document.getElementById('login-container').innerHTML = daftar;
-      document.getElementById('daftar').style.display = 'none';
-      document.getElementById('masuk').style.display = 'block';
+      loginContainer.innerHTML = daftar;
+      elemDaftar.style.display = 'none';
+      elemMasuk.style.display = 'block';
+      elemMasuk.style.animation = 'fadeInUp 0.3s ease forwards';
     }
 
     function masuk() {
-      document.getElementById('login-container').innerHTML = login;
-      document.getElementById('daftar').style.display = 'block';
-      document.getElementById('masuk').style.display = 'none';
+      loginContainer.innerHTML = login;
+      elemMasuk.style.display = 'none';
+      elemDaftar.style.display = 'block';
+      elemDaftar.style.animation = 'fadeInUp 0.3s ease forwards';
     }
   </script>
 

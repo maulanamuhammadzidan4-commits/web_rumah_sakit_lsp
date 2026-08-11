@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../config.php';
 ?>
 
-<form action="<?= BASE_URL; ?>backend/form/login.php" method="post" class="auth-form">
+<form action="<?= BASE_URL; ?>backend/forms/login.php" method="post" class="auth-form" id="usData">
     <h3 class="text-center mb-4">Login</h3>
     <div class="mb-3">
         <label for="login-username" class="form-label">Username</label>
@@ -14,3 +14,4 @@ require_once __DIR__ . '/../../config.php';
     </div>
     <button type="submit" class="btn btn-accent w-100 mt-2">Login</button>
 </form>
+<div id="error-box"></div>
