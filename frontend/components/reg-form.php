@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../config.php';
 ?>
 
-<form action="<?= BASE_URL ?>backend/forms/register.php" method="post" class="auth-form" id="usData">
+<form action="<?= BASE_URL ?>backend/forms/register-process.php" method="post" class="auth-form" id="usData">
     <h3 class="text-center mb-4">Register</h3>
     <div class="mb-3">
         <label for="reg-username" class="form-label">Username</label>
@@ -15,7 +15,7 @@ require_once __DIR__ . '/../../config.php';
     <div class="mb-3">
         <label for="reg-pass" class="form-label">Password</label>
         <input type="password" name="pw" id="reg-pass" class="form-control" placeholder="Masukkan password" required>
+    <div id="error-box"></div>
     </div>
     <button type="submit" class="btn btn-accent w-100 mt-2">Register</button>
 </form>
-<div id="error-box"></div>

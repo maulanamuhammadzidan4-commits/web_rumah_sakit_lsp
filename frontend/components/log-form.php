@@ -11,7 +11,7 @@ require_once __DIR__ . '/../../config.php';
     <div class="mb-3">
         <label for="login-pass" class="form-label">Password</label>
         <input type="password" name="pw" id="login-pass" class="form-control" placeholder="Masukkan password" required>
+    <div id="error-box"></div>
     </div>
     <button type="submit" class="btn btn-accent w-100 mt-2">Login</button>
 </form>
-<div id="error-box"></div>

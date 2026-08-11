@@ -21,6 +21,7 @@
   <div id="preloader"></div>
   <?php include '../components/js.php' ?>
 
+  
   <script>
     const login = `<?php include '../components/log-form.php' ?>`;
     const daftar = `<?php include '../components/reg-form.php' ?>`;
@@ -47,5 +48,6 @@
     }
   </script>
 
+  <script src="../assets/js/validation-reg.js"></script>
 </body>
 </html>

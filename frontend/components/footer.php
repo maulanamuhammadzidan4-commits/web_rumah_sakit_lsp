@@ -4,7 +4,7 @@
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
           <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">RS Lokananda</span>
+            <span class="sitename">RSUD Majalengka</span>
           </a>
           <div class="footer-contact pt-3">
             <p>Jl. Pulang No. 05, Majalengka</p>
@@ -58,7 +58,7 @@
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>&copy; <span>Copyright</span> <strong class="px-1 sitename">RS Lokananda</strong> <span>All Rights Reserved</span></p>
+      <p>&copy; <span>Copyright</span> <strong class="px-1 sitename">RSUD Majalengka</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you've purchased the pro version. -->

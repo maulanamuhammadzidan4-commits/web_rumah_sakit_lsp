@@ -765,6 +765,27 @@ h6 {
   }
 }
 
+/* Styling Khusus Error Box */
+.error-box {
+  display: none; /* Sembunyikan secara bawaan */
+  background-color: #fce8e6;
+  color: #df1529; /* Merah Medilab */
+  border: 1px solid color-mix(in srgb, #df1529, transparent 70%);
+  border-left: 4px solid #df1529; /* Accent border di sebelah kiri */
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Pseudo-class magic: Otomatis tampil HANYA jika div berisi teks/elemen */
+.error-box:not(:empty) {
+  display: block;
+  animation: fadeInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /*--------------------------------------------------------------
 # Global Footer
 --------------------------------------------------------------*/

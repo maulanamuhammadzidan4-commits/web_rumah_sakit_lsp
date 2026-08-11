@@ -6,8 +6,8 @@ require_once __DIR__ . '/../../config.php';
   <div class="topbar d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
       <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:lokanandars1@gmail.com">lokanandars1@gmail.com</a></i>
-        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+62 856-1234-5678</span></i>
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:info@rsudmajalengka.co.id">info@rsudmajalengka.co.id</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+6233281043</span></i>
       </div>
       <div class="social-links d-none d-md-flex align-items-center">
         <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
