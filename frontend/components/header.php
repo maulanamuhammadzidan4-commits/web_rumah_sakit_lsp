@@ -39,13 +39,13 @@ require_once __DIR__ . '/../../config.php';
           <li class="dropdown"><a href="#services"><span>Layanan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Artikel kesehatan</a></li>
-              <li class="dropdown"><a href="<?= BASE_URL; ?>frontend/home.php#departements"><span>Departemen</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <li class="dropdown"><a href="<?= BASE_URL; ?>frontend/home.php#klinik"><span>Klinik spesialis</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
-                  <li><a data-bs-toggle="tab" href="<?= BASE_URL; ?> ?>frontend/home.php#departments-tab-1">Kardiologi</a></li>
-                  <li><a data-bs-toggle="tab" href="<?= BASE_URL; ?> ?>frontend/home.php#departments-tab-2">Neurologi</a></li>
-                  <li><a data-bs-toggle="tab" href="<?= BASE_URL; ?> ?>frontend/home.php#departments-tab-3">Hepatologi</a></li>
-                  <li><a data-bs-toggle="tab" href="<?= BASE_URL; ?> ?>frontend/home.php#departments-tab-4">Pediatri</a></li>
-                  <li><a data-bs-toggle="tab" href="<?= BASE_URL; ?> ?>frontend/home.php#departments-tab-5">Klinik mata</a></li>
+                  <li><a href="<?= BASE_URL; ?>frontend/home.php#klinik-tab-1">Klinik Jantung</a></li>
+                  <li><a href="<?= BASE_URL; ?>frontend/home.php#klinik-tab-2">Klinik Jiwa</a></li>
+                  <li><a href="<?= BASE_URL; ?>frontend/home.php#klinik-tab-3">Klinik Paru</a></li>
+                  <li><a href="<?= BASE_URL; ?>frontend/home.php#klinik-tab-4">Klinik THT</a></li>
+                  <li><a href="<?= BASE_URL; ?>frontend/home.php#klinik-tab-5">Klinik mata</a></li>
                 </ul>
               </li>
               <li><a href="#">Chat Dokter</a></li>

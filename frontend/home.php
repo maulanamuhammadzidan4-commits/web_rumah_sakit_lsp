@@ -279,12 +279,12 @@ session_start();
     </section><!-- /Appointment Section -->
 
     <!-- Departments Section -->
-    <section id="departments" class="departments section">
+    <section id="klinik" class="departments section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Departemen</h2>
-        <p>Penjelasan lebih lanjut tentang departemen kami.</p>
+        <h2>Klinik</h2>
+        <p>Penjelasan lebih lanjut tentang klinik spesialis kami.</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -293,81 +293,76 @@ session_start();
           <div class="col-lg-3">
             <ul class="nav nav-tabs flex-column">
               <li class="nav-item">
-                <a class="nav-link active show" data-bs-toggle="tab" href="#departments-tab-1">Kardiologi</a>
+                <a class="nav-link active show" data-bs-toggle="tab" href="#klinik-tab-1">Klinik Jantung</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#departments-tab-2">Neurologi</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#klinik-tab-2">Klinik Jiwa</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#departments-tab-3">Hepatologi</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#klinik-tab-3">Klinik Paru</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#departments-tab-4">Pediatri</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#klinik-tab-4">Klinik THT</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#departments-tab-5">Kesehatan Mata</a>
+                <a class="nav-link" data-bs-toggle="tab" href="#klinik-tab-5">Klinik Mata</a>
               </li>
             </ul>
           </div>
           <div class="col-lg-9 mt-4 mt-lg-0">
             <div class="tab-content">
-              <div class="tab-pane active show" id="departments-tab-1">
+              <div class="tab-pane active show" id="klinik-tab-1">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Kardiologi</h3>
-                    <p class="fst-italic">Kardiologi adalah ilmu medis yang mempelajari penyakit jantung dan sistem sirkulasi.</p>
-                    <p>Kami menyediakan fasilitas modern untuk mendiagnosis dan mengobati berbagai kondisi kesehatan jantung. Dengan tenaga medis yang berpengalaman dan fasilitas modern, kami menawarkan pelayanan kesehatan jantung yang terbaik dan dapat dipercaya.</p>
+                    <h3>Klinik Jantung</h3>
+                    <p>Klinik Jantung di RSUD Majalengka memberikan layanan spesialis untuk diagnosis, pengobatan, dan perawatan berbagai masalah kesehatan jantung. Dengan dukungan fasilitas medis yang lengkap dan tenaga ahli, seperti dokter spesialis jantung, klinik ini menangani berbagai kondisi jantung seperti hipertensi, gangguan irama jantung, penyakit jantung koroner, dan masalah kardiovaskular lainnya. Klinik ini bertujuan untuk memberikan perawatan yang optimal dalam menjaga kesehatan jantung pasien serta meningkatkan kualitas hidup mereka.</p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="assets/img/departments-1.jpg" alt="" class="img-fluid">
+                    <img src="assets/img/klinik/klinik-jantung.png" alt="" class="img-fluid">
                   </div>
                 </div>
               </div>
-              <div class="tab-pane" id="departments-tab-2">
+              <div class="tab-pane" id="klinik-tab-2">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Neurologi</h3>
-                    <p class="fst-italic">Neurologi adalah ilmu medis yang mempelajari penyakit sistem saraf.</p>
-                    <p>Kami menyediakan layanan Neurologi lengkap untuk mendiagnosis dan mengobati berbagai kondisi kesehatan sistem saraf. Dengan tenaga medis yang berpengalaman dan fasilitas modern, kami menawarkan pelayanan kesehatan saraf yang terbaik dan dapat dipercaya.</p>
+                    <h3>Klinik Jiwa</h3>
+                    <p>Klinik Jiwa di RSUD Majalengka merupakan layanan kesehatan mental yang menyediakan perawatan dan pengobatan untuk pasien dengan gangguan jiwa atau masalah psikologis. Dengan dukungan tenaga medis profesional, klinik ini menawarkan berbagai layanan seperti konseling, terapi, serta pengobatan untuk kondisi seperti depresi, kecemasan, dan gangguan mental lainnya. Tujuan dari layanan ini adalah untuk mendukung pemulihan pasien dan meningkatkan kualitas hidup mereka secara menyeluruh.</p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="assets/img/departments-2.jpg" alt="" class="img-fluid">
+                    <img src="assets/img/klinik/klinik-jiwa.png" alt="" class="img-fluid">
                   </div>
                 </div>
               </div>
-              <div class="tab-pane" id="departments-tab-3">
+              <div class="tab-pane" id="klinik-tab-3">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Hepatologi</h3>
-                    <p class="fst-italic">Hepatologi adalah ilmu medis yang mempelajari penyakit hati.</p>
-                    <p>Kami menyediakan layanan Hepatologi lengkap untuk mendiagnosis dan mengobati berbagai kondisi kesehatan hati. Dengan tenaga medis yang berpengalaman dan fasilitas modern, kami menawarkan pelayanan kesehatan hati yang terbaik dan dapat dipercaya.</p>
+                    <h3>Klinik Paru</h3>
+                    <p>Klinik Paru kami menyediakan layanan medis spesialistik yang fokus pada diagnosis, perawatan, dan pengelolaan berbagai penyakit pada sistem pernapasan, terutama yang memengaruhi paru-paru dan saluran pernapasan. Kami berkomitmen untuk memberikan perawatan yang komprehensif bagi pasien dengan gangguan pernapasan, mulai dari infeksi saluran pernapasan hingga penyakit paru kronis.</p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="assets/img/departments-3.jpg" alt="" class="img-fluid">
+                    <img src="assets/img/klinik/klinik-paru.png" alt="" class="img-fluid">
                   </div>
                 </div>
               </div>
-              <div class="tab-pane" id="departments-tab-4">
+              <div class="tab-pane" id="klinik-tab-4">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Pediatri</h3>
-                    <p class="fst-italic">Pediatri adalah ilmu medis yang mempelajari penyakit pada anak-anak.</p>
-                    <p>Kami menyediakan layanan Pediatri lengkap untuk mendiagnosis dan mengobati berbagai kondisi kesehatan pada anak-anak. Dengan tenaga medis yang berpengalaman dan fasilitas modern, kami menawarkan pelayanan kesehatan anak yang terbaik dan dapat dipercaya.</p>
+                    <h3>Klinik Telinga, Hidung, Tenggorokan</h3>
+                    <p>Klinik Telinga, Hidung, Tenggorokan (THT) kami menyediakan layanan medis spesialistik untuk diagnosis, pengobatan, dan perawatan berbagai masalah kesehatan yang terkait dengan telinga, hidung, dan tenggorokan. Kami didukung oleh dokter spesialis THT yang berpengalaman serta peralatan medis canggih untuk memberikan perawatan yang efektif dan tepat sesuai kebutuhan pasien.</p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="assets/img/departments-4.jpg" alt="" class="img-fluid">
+                    <img src="assets/img/klinik/telinga-hidung-tenggorokan.png" alt="" class="img-fluid">
                   </div>
                 </div>
               </div>
-              <div class="tab-pane" id="departments-tab-5">
+              <div class="tab-pane" id="klinik-tab-5">
                 <div class="row">
                   <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>Kesehatan Mata</h3>
-                    <p class="fst-italic">Kesehatan Mata adalah ilmu medis yang mempelajari penyakit dan perawatan mata.</p>
-                    <p>Kami menyediakan layanan Kesehatan Mata lengkap untuk mendiagnosis dan mengobati berbagai kondisi kesehatan mata. Dengan tenaga medis yang berpengalaman dan fasilitas modern, kami menawarkan pelayanan kesehatan mata yang terbaik dan dapat dipercaya.</p>
+                    <h3>Klinik Mata</h3>
+                    <p>Klinik Mata di RSUD Majalengka menyediakan layanan spesialis untuk diagnosis, pengobatan, dan perawatan berbagai masalah kesehatan mata. Dilengkapi dengan fasilitas medis yang modern, klinik ini menangani berbagai kondisi mata seperti rabun jauh, rabun dekat, glaukoma, katarak, dan infeksi mata. Dengan dukungan tenaga medis profesional, seperti dokter spesialis mata, klinik ini berkomitmen untuk memberikan perawatan terbaik guna meningkatkan kesehatan dan kenyamanan penglihatan pasien.</p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="assets/img/departments-5.jpg" alt="" class="img-fluid">
+                    <img src="assets/img/klinik/klinik-mata.png" alt="" class="img-fluid">
                   </div>
                 </div>
               </div>
