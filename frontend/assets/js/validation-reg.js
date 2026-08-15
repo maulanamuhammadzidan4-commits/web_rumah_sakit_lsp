@@ -24,7 +24,7 @@ document.addEventListener('submit', function(e){
     const pw = pwInput ? pwInput.value.trim() : '';
     const email = emailInput ? emailInput.value.trim() : '';  
 
-    const nameRegEx = /^[a-zA-Z\s]+$/;
+    const nameRegEx = /^[a-zA-Z0-9.,\s]+$/;
     const pwCheck = passCheck(pw);
     const emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 

@@ -766,7 +766,7 @@ h6 {
 }
 
 /* Styling Khusus Error Box */
-.error-box {
+#error-box {
   display: none; /* Sembunyikan secara bawaan */
   background-color: #fce8e6;
   color: #df1529; /* Merah Medilab */
@@ -781,7 +781,7 @@ h6 {
 }
 
 /* Pseudo-class magic: Otomatis tampil HANYA jika div berisi teks/elemen */
-.error-box:not(:empty) {
+#error-box:not(:empty) {
   display: block;
   animation: fadeInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -903,6 +903,126 @@ h6 {
 .footer .credits {
   margin-top: 8px;
   font-size: 13px;
+}
+
+/* ==============================================================
+   CUSTOM FOOTER DARK STYLE (Meniru Desain RSUD Majalengka)
+   ============================================================== */
+
+/* Background Footer Utama */
+.custom-dark-footer {
+  background-color: #1a2332 !important; /* Warna Dark Slate / Navy */
+  color: #d1d5db !important;
+  font-family: var(--default-font);
+  padding-top: 40px;
+  border-top: none !important;
+}
+
+/* Brand & Logo Text */
+.custom-dark-footer .sitename-main {
+  font-size: 20px;
+  font-weight: 700;
+  color: #00a651; /* Hijau Utama Logo */
+  line-height: 1.2;
+}
+
+.custom-dark-footer .sitename-sub {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffc107; /* Kuning/Emas Subtitle Logo */
+}
+
+.custom-dark-footer .footer-address {
+  color: #cbd5e1;
+  font-size: 14px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.custom-dark-footer .footer-contact-info span {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+/* Style Judul Kolom dengan Lines Kuning */
+.custom-dark-footer h4.title-with-line {
+  color: #ffffff !important;
+  font-size: 18px;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+  display: inline-block;
+}
+
+/* Garis bawah kuning di bawah h4 */
+.custom-dark-footer h4.title-with-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #ffc107; /* Warna Kuning Aksen */
+  border-radius: 2px;
+}
+
+/* Link Navigasi Footer */
+.custom-dark-footer .footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.custom-dark-footer .footer-links ul li {
+  padding: 6px 0;
+}
+
+.custom-dark-footer .footer-links ul a {
+  color: #cbd5e1 !important;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.custom-dark-footer .footer-links ul a:hover {
+  color: #00a651 !important; /* Highlight hijau saat di-hover */
+  text-decoration: none;
+}
+
+/* Sosial Media Icons */
+.custom-dark-footer .social-media-icons a {
+  color: #00a651; /* Warna hijau icon */
+  font-size: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.custom-dark-footer .social-media-icons a:hover {
+  color: #22c55e;
+  transform: translateY(-2px);
+}
+
+/* Copyright Bar */
+.custom-dark-footer .copyright {
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #94a3b8;
+  font-size: 13.5px;
+}
+
+/* Adjust Tombol Scroll Top (Hijau di Kanan Bawah) */
+.custom-dark-footer .scroll-top {
+  background-color: #00a651 !important;
+  border-radius: 6px;
+  width: 38px;
+  height: 38px;
+}
+
+.custom-dark-footer .scroll-top:hover {
+  background-color: #059652 !important;
 }
 
 /*--------------------------------------------------------------

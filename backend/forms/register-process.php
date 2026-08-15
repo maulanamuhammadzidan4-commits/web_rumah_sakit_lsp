@@ -1,7 +1,6 @@
 <?php
 
-use Dom\Entity;
-
+require_once __DIR__ . '/../../config.php';
 require_once '../config/database.php';
 
 $userName   = isset($_POST['usname']) ? trim($_POST['usname']) : '';
@@ -9,7 +8,7 @@ $passw      = isset($_POST['pw']) ? trim($_POST['pw']) : '';
 $email      = isset($_POST['email']) ? trim($_POST['email']) : '';
 $errors     = [];
 
-$usNameRegEx = "/^[a-zA-Z\s]+$/";
+$usNameRegEx = "/^[a-zA-Z0-9.,\s]+$/";
 
 function pwCheck(string $pw): array {
   $miss = [];
@@ -63,21 +62,23 @@ if (count($errors) > 0) {
   try {
     $hashedPassword = password_hash($passw, PASSWORD_BCRYPT);
 
-    $sql = "INSERT INTO users (usname, pass, usemail) VALUES (:usname, :pass, :usemail)";
+    $sql = "INSERT INTO users (username, password_hash, email) VALUES (:username, :pass, :usemail)";
     $stmt = $pdo->prepare($sql);
 
     $stmt->execute([
-      ':usname'  => $userName,
+      ':username'  => $userName,
       ':pass'    => $hashedPassword,
       ':usemail' => $email
     ]);
 
     $lastId = $pdo->lastInsertId();
-    echo 'Data berhasil ditambahkan!';
+    
+    header("Location: " . BASE_URL . 'frontend/home.php');
+    exit;
 
   } catch (PDOException $e) {
     error_log($e->getMessage());
-    echo 'Gagal menambahkan data: ' . $e->getMessage();
+    echo 'Gagal menambahkan data. Ada masalah pada database.';
   }
 }
 ?>

@@ -35,19 +35,17 @@ require_once __DIR__ . '/../../config.php';
         <ul>
           <li><a href="<?= BASE_URL; ?>frontend/home.php#hero" class="active">Home<br></a></li>
           <li><a href="<?= BASE_URL; ?>frontend/home.php#about">About</a></li>
-          <li><a href="<?= BASE_URL; ?>frontend/home.php#services">Layanan</a></li>
-          <li><a href="<?= BASE_URL; ?>frontend/home.php#departments">Departemen</a></li>
           <li><a href="<?= BASE_URL; ?>frontend/home.php#doctors">Dokter</a></li>
-          <li class="dropdown"><a href="#"><span>Layanan lain</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="#services"><span>Layanan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Artikel kesehatan</a></li>
-              <li class="dropdown"><a href="#"><span>Departemen</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <li class="dropdown"><a href="<?= BASE_URL; ?>frontend/home.php#departements"><span>Departemen</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
-                  <li><a href="#">Kardiologi</a></li>
-                  <li><a href="#">Neurologi</a></li>
-                  <li><a href="#">Hepatologi</a></li>
-                  <li><a href="#">Pediatri</a></li>
-                  <li><a href="#">Klinik mata</a></li>
+                  <li><a data-bs-toggle="tab" href="<?= BASE_URL; ?> ?>frontend/home.php#departments-tab-1">Kardiologi</a></li>
+                  <li><a data-bs-toggle="tab" href="<?= BASE_URL; ?> ?>frontend/home.php#departments-tab-2">Neurologi</a></li>
+                  <li><a data-bs-toggle="tab" href="<?= BASE_URL; ?> ?>frontend/home.php#departments-tab-3">Hepatologi</a></li>
+                  <li><a data-bs-toggle="tab" href="<?= BASE_URL; ?> ?>frontend/home.php#departments-tab-4">Pediatri</a></li>
+                  <li><a data-bs-toggle="tab" href="<?= BASE_URL; ?> ?>frontend/home.php#departments-tab-5">Klinik mata</a></li>
                 </ul>
               </li>
               <li><a href="#">Chat Dokter</a></li>
@@ -69,7 +67,16 @@ require_once __DIR__ . '/../../config.php';
           <span>IGD</span>
         </a>
 
-        <a class="cta-btn" id="register" href="<?= BASE_URL ?>frontend/pages/login-page.php">Login</a>
+        <?php if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true): ?>
+          <!-- Tampilan saat User sudah Login -->
+          <span class="navbar-text me-2">
+            Halo, <strong><?= htmlspecialchars($_SESSION['username'], ENT_QUOTES, 'UTF-8'); ?></strong>
+          </span>
+          <a class="cta-btn btn-danger" href="<?= BASE_URL; ?>backend/forms/logout.php">Logout</a>
+        <?php else: ?>
+          <!-- Tampilan saat User Belum Login -->
+          <a class="cta-btn" id="login" href="<?= BASE_URL ?>frontend/pages/login-page.php">Login</a>
+        <?php endif; ?>
 
         <!-- Tombol Buat Janji Temu -->
         <a class="cta-btn" href="<?= BASE_URL; ?>frontend/home.php#appointment">Janji Temu</a>

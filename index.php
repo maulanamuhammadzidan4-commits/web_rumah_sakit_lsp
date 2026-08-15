@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,8 +75,8 @@
   <?php include 'frontend/components/js.php' ?>
 
   <script>
-    const login = `<?php include '../components/log-form.php' ?>`;
-    const daftar = `<?php include '../components/reg-form.php' ?>`;
+    const login = `<?php include 'frontend/components/log-form.php' ?>`;
+    const daftar = `<?php include 'frontend/components/reg-form.php' ?>`;
 
     const loginContainer = document.getElementById('login-container');
     const elemDaftar = document.getElementById('daftar');

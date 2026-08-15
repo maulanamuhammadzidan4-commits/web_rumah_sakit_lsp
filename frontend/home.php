@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,23 +18,20 @@
     <!-- Hero Section -->
     <section id="hero" class="hero section light-background">
 
-      <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in">
+      <img src="assets/img/hero-bg.png" alt="" data-aos="fade-in">
 
       <div class="container position-relative">
 
-        <div class="welcome position-relative" data-aos="fade-down" data-aos-delay="100">
-          <h2>RSUD Majalengka</h2>
-          <p>Kesehatan Anda prioritas kami</p>
-        </div><!-- End Welcome -->
+        
 
         <div class="content row gy-4">
           <div class="col-lg-4 d-flex align-items-stretch">
             <div class="why-box" data-aos="zoom-out" data-aos-delay="200">
-              <h3>Kenapa RSUD Majalengka?</h3>
+              <h3>RSUD Majalengka</h3>
               <p>
-                RSUD Majalengka adalah rumah sakit yang dipercaya selama puluhan tahun. Dengan layanan-layanan kesehatan yang lengkap.
-                Dengan dokter-dokter yang berpengalaman di bidangnya, membuat rumah sakit ini terpercaya.
-                Berokasi di Jl. Pulang Majalengka.
+                RSUD Majalengka adalah rumah sakit daerah yang berkomitmen memberikan pelayanan kesehatan terbaik bagi masyarakat.
+                Dengan fasilitas modern, tenaga medis profesional, dan berbagai layanan spesialis, RSUD Majalengka hadir untuk memastikan perawatan yang berkualitas, aman, dan terjangkau.
+                Kami terus berinovasi untuk meningkatkan mutu layanan demi kesehatan dan kesejahteraan pasien.
               </p>
               <div class="text-center">
                 <a href="#about" class="more-btn"><span>Learn more</span> <i class="bi bi-chevron-right"></i></a>
@@ -121,51 +122,6 @@
       </div>
 
     </section><!-- /About Section -->
-
-    <!-- Stats Section -->
-    <section id="stats" class="stats section light-background">
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
-            <i class="fa-solid fa-user-doctor"></i>
-            <div class="stats-item">
-              <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Dokter</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
-            <i class="fa-regular fa-hospital"></i>
-            <div class="stats-item">
-              <span data-purecounter-start="0" data-purecounter-end="18" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Departemen</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
-            <i class="fas fa-flask"></i>
-            <div class="stats-item">
-              <span data-purecounter-start="0" data-purecounter-end="12" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Labolatorium penelitian</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
-            <i class="fas fa-award"></i>
-            <div class="stats-item">
-              <span data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Penghargaan</p>
-            </div>
-          </div><!-- End Stats Item -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Stats Section -->
 
     <!-- Services Section -->
     <section id="services" class="services section">

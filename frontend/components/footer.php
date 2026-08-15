@@ -1,71 +1,83 @@
-  <footer id="footer" class="footer light-background">
+<?php
+require_once __DIR__ . '/../../config.php';
+?>
 
-    <div class="container footer-top">
-      <div class="row gy-4">
-        <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">RSUD Majalengka</span>
-          </a>
-          <div class="footer-contact pt-3">
-            <p>Jl. Pulang No. 05, Majalengka</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+62 856-1234-5678</span></p>
-            <p><strong>Email:</strong> <span>lokanandars1@gmail.com</span></p>
+<footer id="footer" class="footer custom-dark-footer">
+
+  <div class="container footer-top">
+    <div class="row gy-4 justify-content-between">
+      
+      <!-- Kolom 1: Logo, Alamat, Kontak -->
+      <div class="col-lg-4 col-md-6 footer-about">
+        <a href="index.html" class="logo d-flex align-items-center mb-3">
+          <!-- Kamu bisa ganti SVGs/Img dengan logo RSUD asli jika ada -->
+          <img src="<?= BASE_URL; ?>frontend/assets/img/logo.png" alt="logo" class="logo-img me-2">
+          <div class="brand-text">
+            <h1 class="sitename-main m-0">RSUD Majalengka</h1>
+            <p class="sitename-sub m-0">Kabupaten Majalengka</p>
           </div>
-          <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
-          </div>
+        </a>
+        
+        <p class="footer-address">
+          Jl. Kesehatan No. 7 Majalengka Jawa Barat
+        </p>
+        
+        <div class="footer-contact-info pt-2">
+          <p class="d-flex align-items-center mb-2">
+            <i class="bi bi-telephone me-2 text-warning"></i>
+            <span>+6233281043</span>
+          </p>
+          <p class="d-flex align-items-center mb-0">
+            <i class="bi bi-envelope me-2 text-warning"></i>
+            <span>info@rsudmajalengka.co.id</span>
+          </p>
         </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Link Berguna</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#">Tentang Kami</a></li>
-            <li><a href="#">Layanan</a></li>
-            <li><a href="#">Syarat Layanan</a></li>
-            <li><a href="#">Kebijakan Privasi</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Layanan Kami</h4>
-          <ul>
-            <li><a href="#">Artikel kesehatan</a></li>
-            <li><a href="#">Obat</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Sumber</h4>
-          <ul>
-            <li><a href="https://themewagon.com/themes/medilab/">Medilab Theme</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Web berguna</h4>
-          <ul>
-            <li><a href="https://bootstrapmade.com/">BootstrapMade</a></li>
-            <li><a href="https://themewagon.com">ThemeWagon</a></li>
-            <li><a href="https://rsudmajalengka.co.id/">RSUD Majalengka</a></li>
-          </ul>
-        </div>
-
       </div>
-    </div>
 
-    <div class="container copyright text-center mt-4">
-      <p>&copy; <span>Copyright</span> <strong class="px-1 sitename">RSUD Majalengka</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
+      <!-- Kolom 2: Layanan -->
+      <div class="col-lg-2 col-md-3 footer-links">
+        <h4 class="title-with-line">Layanan</h4>
+        <ul>
+          <li><a href="#">Rawat Inap</a></li>
+          <li><a href="#">Spesialis</a></li>
+          <li><a href="#">Layanan Unggulan</a></li>
+          <li><a href="#">Unit Gawat Darurat</a></li>
+        </ul>
       </div>
-    </div>
 
-  </footer>
+      <!-- Kolom 3: Menu -->
+      <div class="col-lg-2 col-md-3 footer-links">
+        <h4 class="title-with-line">Menu</h4>
+        <ul>
+          <li><a href="#">Cari Dokter</a></li>
+          <li><a href="#">Berita Terkini</a></li>
+          <li><a href="#">PPID</a></li>
+          <li><a href="#">Informasi Pelayanan</a></li>
+        </ul>
+      </div>
+
+      <!-- Kolom 4: Sosial Media -->
+      <div class="col-lg-3 col-md-3 footer-social-col">
+        <h4 class="title-with-line">Sosial Media</h4>
+        <div class="social-media-icons d-flex gap-3 mt-3">
+          <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+          <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Copyright Section -->
+  <div class="container copyright text-center mt-4">
+    <p>&copy; 2025 RSUD Majalengka</p>
+  </div>
+
+  <!-- Scroll to top button (Jika ingin ditaruh di dalam footer atau tetap pakai milik bawaan) -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center active">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+</footer>
