@@ -35,7 +35,6 @@ require_once __DIR__ . '/../../config.php';
         <ul>
           <li><a href="<?= BASE_URL; ?>frontend/home.php#hero" class="active">Home<br></a></li>
           <li><a href="<?= BASE_URL; ?>frontend/home.php#about">About</a></li>
-          <li><a href="<?= BASE_URL; ?>frontend/home.php#doctors">Dokter</a></li>
           <li class="dropdown"><a href="#services"><span>Layanan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="#">Artikel kesehatan</a></li>
@@ -54,6 +53,7 @@ require_once __DIR__ . '/../../config.php';
               <li><a href="<?= BASE_URL; ?>pages/room.html">Kamar</a></li>
             </ul>
           </li>
+          <li><a href="<?= BASE_URL; ?>frontend/home.php#doctors">Dokter</a></li>
           <li><a href="<?= BASE_URL; ?>frontend/home.php#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
