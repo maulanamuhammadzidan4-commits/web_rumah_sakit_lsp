@@ -58,12 +58,27 @@ if (count($errors) > 0) {
       $_SESSION['user'] = [
         'id'          => $user['user_id'],
         'username'    => $user['username'],
+        'email'       => $user['email'],
         'roles'       => $roles,
         'permissions' => $permissions
       ];
+      $_SESSION['username'] = $user['username'];
+      $_SESSION['email'] = $user['email'];
       $_SESSION['is_logged_in'] = true;
 
-      $redirectUrl = rtrim(BASE_URL, '/') . '/frontend/pages/data-diri.php';
+      $isAdmin = false;
+      foreach ($_SESSION['user']['roles'] as $role) {
+        if (in_array($role, ['admin', 'super admin', 'super_admin'], true)) {
+          $isAdmin = true;
+          break;
+          }
+      }
+      if ($isAdmin) {
+        $redirectUrl = rtrim(BASE_URL, '/') . '/admin/dashboard/admin-dashboard.php';
+      } else {
+        $redirectUrl = rtrim(BASE_URL, '/') . '/frontend/pages/data-diri.php';
+      }
+      
       header("Location: " . $redirectUrl);
       exit;
 

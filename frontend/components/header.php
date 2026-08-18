@@ -85,6 +85,7 @@ if (isset($_SESSION['user'])){
           <span class="navbar-text me-2">
             Halo, <strong><?= htmlspecialchars($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></strong>
           </span>
+          <a class="cta-btn" href="<?= BASE_URL; ?>frontend/pages/profile.php">Profil Saya</a>
           <?php endif; ?>
           <a class="cta-btn btn-danger" href="<?= BASE_URL; ?>backend/forms/logout.php">Logout</a>
         <?php else: ?>

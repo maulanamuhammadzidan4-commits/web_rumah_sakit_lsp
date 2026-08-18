@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+require_once __DIR__ . '/../../config.php';
+
+if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true) {
+    header('Location: ' . rtrim(BASE_URL, '/') . '/frontend/pages/profile.php');
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -2026,8 +2026,91 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Starter Section Section
+# Custom Form Data Diri Section
 --------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
+.custom-form-card {
+  background-color: var(--surface-color);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 85%);
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.custom-form-card .form-label {
+  font-weight: 600;
+  color: var(--heading-color);
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.custom-form-card .form-control,
+.custom-form-card .form-select {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 80%);
+  font-size: 14px;
+  color: var(--default-color);
+  background-color: var(--background-color);
+  transition: all 0.3s ease;
+}
+
+.custom-form-card .form-control:focus,
+.custom-form-card .form-select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--accent-color), transparent 80%);
+  outline: none;
+}
+
+.custom-form-card .form-control::placeholder {
+  color: color-mix(in srgb, var(--default-color), transparent 60%);
+}
+
+.btn-accent-form {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  border: none;
+  padding: 12px 40px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn-accent-form:hover {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 15%);
+  color: var(--contrast-color);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--accent-color), transparent 60%);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 575.98px) {
+  .custom-form-card {
+    padding: 20px 15px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Custom Section Data Diri dengan Gambar Latar Belakang
+--------------------------------------------------------------*/
+.data-diri-bg {
+  position: relative;
+  /* PERUBAHAN DISINI: Ganti nama file gambar sesuai dengan nama file-mu di folder assets/img/ */
+  background-image: linear-gradient(rgba(241, 247, 252, 0.75), rgba(241, 247, 252, 0.75)), url('../img/form-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* PERUBAHAN DISINI: Hapus background-color solid bawaan template agar tidak bertabrakan */
+  background-color: transparent !important;
+}
+
+/* Pastikan section title tetap menggunakan warna heading yang konsisten */
+.data-diri-bg .section-title h2 {
+  color: var(--heading-color);
+}
+
+.data-diri-bg .section-title p {
+  color: color-mix(in srgb, var(--default-color), transparent 10%);
 }
