@@ -1,5 +1,15 @@
 <?php
 require_once __DIR__ . '/../../config.php';
+$is_admin = false;
+
+if (isset($_SESSION['user'])){
+  foreach ($_SESSION['user']['roles'] as $role) {
+    if (in_array(strtolower($role), ['admin', 'super admin', 'super_admin'], true)){
+      $is_admin = true;
+      break;
+    }
+  }
+}
 ?>
 <header id="header" class="header sticky-top">
 
@@ -69,9 +79,13 @@ require_once __DIR__ . '/../../config.php';
 
         <?php if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true): ?>
           <!-- Tampilan saat User sudah Login -->
+          <?php if ($is_admin): ?>
+            <a class="cta-btn" href="<?= BASE_URL ?>admin/index.php">Admin</a>
+          <?php else: ?>
           <span class="navbar-text me-2">
-            Halo, <strong><?= htmlspecialchars($_SESSION['username'], ENT_QUOTES, 'UTF-8'); ?></strong>
+            Halo, <strong><?= htmlspecialchars($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></strong>
           </span>
+          <?php endif; ?>
           <a class="cta-btn btn-danger" href="<?= BASE_URL; ?>backend/forms/logout.php">Logout</a>
         <?php else: ?>
           <!-- Tampilan saat User Belum Login -->

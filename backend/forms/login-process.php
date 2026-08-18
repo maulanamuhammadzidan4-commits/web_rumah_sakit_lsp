@@ -63,7 +63,7 @@ if (count($errors) > 0) {
       ];
       $_SESSION['is_logged_in'] = true;
 
-      $redirectUrl = rtrim(BASE_URL, '/') . '/frontend/home.php';
+      $redirectUrl = rtrim(BASE_URL, '/') . '/frontend/pages/data-diri.php';
       header("Location: " . $redirectUrl);
       exit;
 

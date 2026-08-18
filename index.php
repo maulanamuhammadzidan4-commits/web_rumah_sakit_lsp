@@ -21,8 +21,8 @@ session_start();
         <div class="container">
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
-              <h1>Starter Page</h1>
-              <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
+              <h1>Selamat datang!</h1>
+              <p class="mb-0">RSUD Majalengka adalah rumah sakit daerah yang berkomitmen memberikan pelayanan kesehatan terbaik bagi masyarakat. Dengan fasilitas modern, tenaga medis profesional, dan berbagai layanan spesialis, RSUD Majalengka hadir untuk memastikan perawatan yang berkualitas, aman, dan terjangkau.</p>
             </div>
           </div>
         </div>
@@ -38,29 +38,21 @@ session_start();
     </div><!-- End Page Title -->
 
     <!-- Starter Section Section -->
+    <?php if(!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] === false): ?>
     <section id="starter-section" class="starter-section section">
-
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Starter Section</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up">
-        <p>Use this page as a starter for your own custom pages.</p>
-      </div>
-
-    </section><!-- /Starter Section Section -->
-
-    <section id="login">
-    <div class="login-card">
-      <div id="login-container"></div>
-      <div class="alter">
-        <p id="daftar">Belum punya akun? <a href="javascript:void(0)" onclick="reg()">Register</a></p>
-        <p id="masuk" style="display: none;">Sudah punya akun? <a href="javascript:void(0)" onclick="masuk()">Login</a></p>
-      </div>
-    </div>
+        <h2>Daftar</h2>
+        <p>Daftar untuk mempercepat proses pendaftaran online di kemudian hari</p>
+        <div class="login-card">
+          <div id="login-container"></div>
+          <div class="alter">
+            <p id="daftar">Belum punya akun? <a href="javascript:void(0)" onclick="reg()">Register</a></p>
+            <p id="masuk" style="display: none;">Sudah punya akun? <a href="javascript:void(0)" onclick="masuk()">Login</a></p>
+          </div>
+        </div>
     </section>
+    <?php endif; ?>
 
   </main>
 

@@ -49,7 +49,7 @@ require_once __DIR__ . '/../../config.php';
       <div class="col-lg-2 col-md-3 footer-links">
         <h4 class="title-with-line">Menu</h4>
         <ul>
-          <li><a href="#">Cari Dokter</a></li>
+          <li><a href="<?= BASE_URL ?>frontend/home.php#doctors">Cari Dokter</a></li>
           <li><a href="#">Berita Terkini</a></li>
           <li><a href="#">PPID</a></li>
           <li><a href="#">Informasi Pelayanan</a></li>
