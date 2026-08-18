@@ -85,6 +85,8 @@ try {
     $pdo->commit();
 
     $_SESSION['profile_success'] = 'Data diri berhasil disimpan.';
+    $_SESSION['is_added_data_diri'] = true;
+    $_SESSION['user']['profile_complete'] = true;
     header('Location: ' . rtrim(BASE_URL, '/') . '/frontend/pages/profile.php');
     exit;
 } catch (PDOException $e) {

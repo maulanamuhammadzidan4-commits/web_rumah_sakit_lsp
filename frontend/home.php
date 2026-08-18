@@ -1,5 +1,39 @@
 <?php
 session_start();
+
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../backend/config/database.php';
+require_once __DIR__ . '/../backend/config/components/doctors.php';
+require_once __DIR__ . '/../backend/config/components/gallery.php';
+
+$doctors = get_doctors($pdo);
+$galleryImages = get_gallery($pdo);
+
+#---------------------------------------------------
+# CHECK LOGIN STATUS & USER DATA
+#---------------------------------------------------
+$isLoggedIn = isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true;
+$userData = null;
+$isDataDiriComplete = false;
+
+if ($isLoggedIn) {
+    $userId = (int)($_SESSION['user']['id'] ?? 0);
+    if ($userId > 0) {
+        try {
+            $stmt = $pdo->prepare('SELECT username, email, full_name, telp, address FROM users WHERE user_id = :user_id LIMIT 1');
+            $stmt->execute([':user_id' => $userId]);
+            $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            // Check if data diri is complete (full_name, telp, address must be filled)
+            if ($userData && !empty($userData['full_name']) && !empty($userData['telp']) && !empty($userData['address'])) {
+                $isDataDiriComplete = true;
+            }
+        } catch (PDOException $e) {
+            error_log("Error fetching user data: " . $e->getMessage());
+        }
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +118,7 @@ session_start();
         <div class="row gy-4 gx-5">
 
           <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="200">
-            <img src="assets/img/about.jpg" class="img-fluid" alt="">
+            <img src="assets/img/about.png" class="img-fluid" alt="">
           </div>
 
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
@@ -228,51 +262,179 @@ session_start();
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
-          <div class="row">
-            <div class="col-md-4 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Masukkan nama Anda" required="">
-            </div>
-            <div class="col-md-4 form-group mt-3 mt-md-0">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Masukkan email Anda" required="">
-            </div>
-            <div class="col-md-4 form-group mt-3 mt-md-0">
-              <input type="tel" class="form-control" name="phone" id="phone" placeholder="Masukkan nomor telepon Anda" required="">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 form-group mt-3">
-              <input type="datetime-local" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" required="">
-            </div>
-            <div class="col-md-4 form-group mt-3">
-              <select name="department" id="department" class="form-select" required="">
-                <option value="">Pilih Departemen</option>
-                <option value="Department 1">Kardiologi</option>
-                <option value="Department 2">Neurologi</option>
-                <option value="Department 3">Hepatologi</option>
-                <option value="Department 4">Pediatri</option>
-              </select>
-            </div>
-            <div class="col-md-4 form-group mt-3">
-              <select name="doctor" id="doctor" class="form-select" required="">
-                <option value="">Pilih Dokter</option>
-                <option value="Doctor 1">Doctor 1</option>
-                <option value="Doctor 2">Doctor 2</option>
-                <option value="Doctor 3">Doctor 3</option>
-              </select>
-            </div>
+        <?php if (!$isLoggedIn): ?>
+          <!-- FORM UNTUK USER YANG BELUM LOGIN -->
+          <div class="alert alert-info" role="alert">
+            <i class="bi bi-info-circle me-2"></i>
+            Silakan <a href="pages/login-page.php" class="alert-link">login terlebih dahulu</a> untuk membuat janji temu.
           </div>
 
-          <div class="form-group mt-3">
-            <textarea class="form-control" name="message" rows="5" placeholder="Pesan (Opsional)"></textarea>
+          <form id="appointmentFormGuest" method="post" role="form" class="php-email-form">
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Masukkan nama Anda" required="">
+              </div>
+              <div class="col-md-4 form-group mt-3 mt-md-0">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Masukkan email Anda" required="">
+              </div>
+              <div class="col-md-4 form-group mt-3 mt-md-0">
+                <input type="tel" class="form-control" name="phone" id="phone" placeholder="Masukkan nomor telepon Anda" required="">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 form-group mt-3">
+                <input type="datetime-local" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" required="">
+              </div>
+              <div class="col-md-4 form-group mt-3">
+                <select name="department" id="department" class="form-select" required="">
+                  <option value="">Pilih Klinik</option>
+                  <option value="Klinik Jantung">Klinik Jantung</option>
+                  <option value="Klinik Jiwa">Klinik Jiwa</option>
+                  <option value="Klinik Paru">Klinik Paru</option>
+                  <option value="Klinik THT">Klinik THT</option>
+                  <option value="Klinik Mata">Klinik Mata</option>
+                </select>
+              </div>
+              <div class="col-md-4 form-group mt-3">
+                <select name="doctor" id="doctor" class="form-select" required="">
+                  <option value="">Pilih Dokter</option>
+                  <?php foreach ($doctors as $doctor): ?>
+                  <option value="<?= htmlspecialchars($doctor['nama_dokter']); ?>"><?= htmlspecialchars($doctor['nama_dokter']); ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group mt-3">
+              <textarea class="form-control" name="message" rows="5" placeholder="Pesan (Opsional)"></textarea>
+            </div>
+            <div class="mt-3">
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Permintaan janji temu Anda telah dikirimkan dengan sukses. Terima kasih!</div>
+              <div class="text-center">
+                <button type="button" onclick="handleGuestAppointment()" class="btn btn-primary">Buat Janji Temu</button>
+              </div>
+            </div>
+          </form>
+        <?php elseif ($isLoggedIn && !$isDataDiriComplete): ?>
+          <!-- FORM UNTUK USER YANG SUDAH LOGIN TAPI BELUM LENGKAP DATA DIRI -->
+          <div class="alert alert-warning" role="alert">
+            <i class="bi bi-exclamation-triangle me-2"></i>
+            Anda perlu melengkapi <a href="pages/data-diri.php" class="alert-link">data diri Anda</a> terlebih dahulu sebelum membuat janji temu.
           </div>
-          <div class="mt-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Permintaan janji temu Anda telah dikirimkan dengan sukses. Terima kasih!</div>
-            <div class="text-center"><button type="submit">Buat Janji Temu</button></div>
-          </div>
-        </form>
+
+          <form id="appointmentFormIncomplete" method="post" role="form" class="php-email-form">
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <input type="text" name="name" class="form-control" id="name2" placeholder="Masukkan nama Anda" required="">
+              </div>
+              <div class="col-md-4 form-group mt-3 mt-md-0">
+                <input type="email" class="form-control" name="email" id="email2" placeholder="Masukkan email Anda" required="">
+              </div>
+              <div class="col-md-4 form-group mt-3 mt-md-0">
+                <input type="tel" class="form-control" name="phone" id="phone2" placeholder="Masukkan nomor telepon Anda" required="">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 form-group mt-3">
+                <input type="datetime-local" name="date" class="form-control datepicker" id="date2" placeholder="Appointment Date" required="">
+              </div>
+              <div class="col-md-4 form-group mt-3">
+                <select name="department" id="department2" class="form-select" required="">
+                  <option value="">Pilih Klinik</option>
+                  <option value="Klinik Jantung">Klinik Jantung</option>
+                  <option value="Klinik Jiwa">Klinik Jiwa</option>
+                  <option value="Klinik Paru">Klinik Paru</option>
+                  <option value="Klinik THT">Klinik THT</option>
+                  <option value="Klinik Mata">Klinik Mata</option>
+                </select>
+              </div>
+              <div class="col-md-4 form-group mt-3">
+                <select name="doctor" id="doctor2" class="form-select" required="">
+                  <option value="">Pilih Dokter</option>
+                  <?php foreach ($doctors as $doctor): ?>
+                  <option value="<?= htmlspecialchars($doctor['nama_dokter']); ?>"><?= htmlspecialchars($doctor['nama_dokter']); ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group mt-3">
+              <textarea class="form-control" name="message" rows="5" placeholder="Pesan (Opsional)"></textarea>
+            </div>
+            <div class="mt-3">
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Permintaan janji temu Anda telah dikirimkan dengan sukses. Terima kasih!</div>
+              <div class="text-center">
+                <button type="button" onclick="handleIncompleteAppointment()" class="btn btn-primary">Buat Janji Temu</button>
+              </div>
+            </div>
+          </form>
+        <?php else: ?>
+          <!-- FORM UNTUK USER YANG SUDAH LOGIN DAN DATA DIRI LENGKAP -->
+          <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
+            <!-- Hidden inputs untuk nama, email, telepon -->
+            <input type="hidden" name="name" id="hidden_name" value="<?= htmlspecialchars($userData['full_name'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+            <input type="hidden" name="email" id="hidden_email" value="<?= htmlspecialchars($userData['email'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+            <input type="hidden" name="phone" id="hidden_phone" value="<?= htmlspecialchars($userData['telp'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+
+            <!-- Display user info as read-only -->
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label for="display_name" class="form-label">Nama</label>
+                <input type="text" class="form-control bg-light" id="display_name" value="<?= htmlspecialchars($userData['full_name'] ?? '', ENT_QUOTES, 'UTF-8') ?>" readonly="">
+              </div>
+              <div class="col-md-4 form-group">
+                <label for="display_email" class="form-label">Email</label>
+                <input type="email" class="form-control bg-light" id="display_email" value="<?= htmlspecialchars($userData['email'] ?? '', ENT_QUOTES, 'UTF-8') ?>" readonly="">
+              </div>
+              <div class="col-md-4 form-group">
+                <label for="display_phone" class="form-label">No. Telepon</label>
+                <input type="tel" class="form-control bg-light" id="display_phone" value="<?= htmlspecialchars($userData['telp'] ?? '', ENT_QUOTES, 'UTF-8') ?>" readonly="">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 form-group mt-3">
+                <label for="date_logged_in" class="form-label">Tanggal & Waktu <span class="text-danger">*</span></label>
+                <input type="datetime-local" name="date" class="form-control datepicker" id="date_logged_in" placeholder="Appointment Date" required="">
+              </div>
+              <div class="col-md-4 form-group mt-3">
+                <label for="department_logged_in" class="form-label">Klinik <span class="text-danger">*</span></label>
+                <select name="department" id="department_logged_in" class="form-select" required="">
+                  <option value="">Pilih Klinik</option>
+                  <option value="Klinik Jantung">Klinik Jantung</option>
+                  <option value="Klinik Jiwa">Klinik Jiwa</option>
+                  <option value="Klinik Paru">Klinik Paru</option>
+                  <option value="Klinik THT">Klinik THT</option>
+                  <option value="Klinik Mata">Klinik Mata</option>
+                </select>
+              </div>
+              <div class="col-md-4 form-group mt-3">
+                <label for="doctor_logged_in" class="form-label">Dokter <span class="text-danger">*</span></label>
+                <select name="doctor" id="doctor_logged_in" class="form-select" required="">
+                  <option value="">Pilih Dokter</option>
+                  <?php foreach ($doctors as $doctor): ?>
+                  <option value="<?= htmlspecialchars($doctor['nama_dokter']); ?>"><?= htmlspecialchars($doctor['nama_dokter']); ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group mt-3">
+              <label for="message_logged_in" class="form-label">Pesan (Opsional)</label>
+              <textarea class="form-control" name="message" id="message_logged_in" rows="5" placeholder="Pesan (Opsional)"></textarea>
+            </div>
+            <div class="mt-3">
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Permintaan janji temu Anda telah dikirimkan dengan sukses. Terima kasih!</div>
+              <div class="text-center"><button type="submit">Buat Janji Temu</button></div>
+            </div>
+          </form>
+        <?php endif; ?>
 
       </div>
 
@@ -387,11 +549,6 @@ session_start();
 
         <div class="row gy-4">
 
-        <?php
-          require_once __DIR__ . '/../backend/config/components/doctors.php';
-          $doctors = get_doctors($pdo);
-        ?>
-
         <?php foreach ($doctors as $doctor): ?>
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <div class="team-member d-flex align-items-start">
@@ -418,227 +575,6 @@ session_start();
 
     </section><!-- /Doctors Section -->
 
-    <!-- Faq Section -->
-    <section id="faq" class="faq section light-background">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Pertanyaan yang sering diajukan</h2>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row justify-content-center">
-
-          <div class="col-lg-10" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="faq-container">
-
-              <div class="faq-item faq-active">
-                <h3>Non consectetur a erat nam at lectus urna duis?</h3>
-                <div class="faq-content">
-                  <p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Feugiat scelerisque varius morbi enim nunc faucibus?</h3>
-                <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Dolor sit amet consectetur adipiscing elit pellentesque?</h3>
-                <div class="faq-content">
-                  <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?</h3>
-                <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Tempus quam pellentesque nec nam aliquam sem et tortor?</h3>
-                <div class="faq-content">
-                  <p>Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Perspiciatis quod quo quos nulla quo illum ullam?</h3>
-                <div class="faq-content">
-                  <p>Enim ea facilis quaerat voluptas quidem et dolorem. Quis et consequatur non sed in suscipit sequi. Distinctio ipsam dolore et.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
-            </div>
-
-          </div><!-- End Faq Column-->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Faq Section -->
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section">
-
-      <div class="container">
-
-        <div class="row align-items-center">
-
-          <div class="col-lg-5 info" data-aos="fade-up" data-aos-delay="100">
-            <h3>Testimoni</h3>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-            </p>
-          </div>
-
-          <div class="col-lg-7" data-aos="fade-up" data-aos-delay="200">
-
-            <div class="swiper init-swiper">
-              <script type="application/json" class="swiper-config">
-                {
-                  "loop": true,
-                  "speed": 600,
-                  "autoplay": {
-                    "delay": 5000
-                  },
-                  "slidesPerView": "auto",
-                  "pagination": {
-                    "el": ".swiper-pagination",
-                    "type": "bullets",
-                    "clickable": true
-                  }
-                }
-              </script>
-              <div class="swiper-wrapper">
-
-                <div class="swiper-slide">
-                  <div class="testimonial-item">
-                    <div class="d-flex">
-                      <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img flex-shrink-0" alt="">
-                      <div>
-                        <h3>Saul Goodman</h3>
-                        <h4>Ceo &amp; Founder</h4>
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <p>
-                      <i class="bi bi-quote quote-icon-left"></i>
-                      <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
-                      <i class="bi bi-quote quote-icon-right"></i>
-                    </p>
-                  </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                  <div class="testimonial-item">
-                    <div class="d-flex">
-                      <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img flex-shrink-0" alt="">
-                      <div>
-                        <h3>Sara Wilsson</h3>
-                        <h4>Designer</h4>
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <p>
-                      <i class="bi bi-quote quote-icon-left"></i>
-                      <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                      <i class="bi bi-quote quote-icon-right"></i>
-                    </p>
-                  </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                  <div class="testimonial-item">
-                    <div class="d-flex">
-                      <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img flex-shrink-0" alt="">
-                      <div>
-                        <h3>Jena Karlis</h3>
-                        <h4>Store Owner</h4>
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <p>
-                      <i class="bi bi-quote quote-icon-left"></i>
-                      <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
-                      <i class="bi bi-quote quote-icon-right"></i>
-                    </p>
-                  </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                  <div class="testimonial-item">
-                    <div class="d-flex">
-                      <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img flex-shrink-0" alt="">
-                      <div>
-                        <h3>Matt Brandon</h3>
-                        <h4>Freelancer</h4>
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <p>
-                      <i class="bi bi-quote quote-icon-left"></i>
-                      <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
-                      <i class="bi bi-quote quote-icon-right"></i>
-                    </p>
-                  </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                  <div class="testimonial-item">
-                    <div class="d-flex">
-                      <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img flex-shrink-0" alt="">
-                      <div>
-                        <h3>John Larson</h3>
-                        <h4>Entrepreneur</h4>
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <p>
-                      <i class="bi bi-quote quote-icon-left"></i>
-                      <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.</span>
-                      <i class="bi bi-quote quote-icon-right"></i>
-                    </p>
-                  </div>
-                </div><!-- End testimonial item -->
-
-              </div>
-              <div class="swiper-pagination"></div>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- /Testimonials Section -->
-
     <!-- Gallery Section -->
     <section id="gallery" class="gallery section">
 
@@ -652,69 +588,15 @@ session_start();
 
         <div class="row g-0">
 
+          <?php foreach ($galleryImages as $image): ?>
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="assets/img/gallery/gallery-1.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="assets/img/gallery/gallery-1.jpg" alt="" class="img-fluid">
+              <a href="assets/img/gallery/<?= htmlspecialchars($image['file_name']) ?>" class="glightbox" data-gallery="images-gallery" data-title="<?= htmlspecialchars($image['title']) ?>" data-description="<?= htmlspecialchars($image['description']) ?>">
+                <img src="assets/img/gallery/<?= htmlspecialchars($image['file_name']) ?>" alt="<?= htmlspecialchars($image['title']) ?>" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="assets/img/gallery/gallery-2.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="assets/img/gallery/gallery-2.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="assets/img/gallery/gallery-3.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="assets/img/gallery/gallery-3.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="assets/img/gallery/gallery-4.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="assets/img/gallery/gallery-4.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="assets/img/gallery/gallery-5.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="assets/img/gallery/gallery-5.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="assets/img/gallery/gallery-6.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="assets/img/gallery/gallery-6.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="assets/img/gallery/gallery-7.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="assets/img/gallery/gallery-7.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div><!-- End Gallery Item -->
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="assets/img/gallery/gallery-8.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="assets/img/gallery/gallery-8.jpg" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div><!-- End Gallery Item -->
+          <?php endforeach; ?>
 
         </div>
 
@@ -815,6 +697,24 @@ session_start();
   <div id="preloader"></div>
 
 <?php include 'components/js.php' ?>
+
+<script>
+  /**
+   * Handle appointment form submission for guest users
+   * Redirects to login page when submit is clicked
+   */
+  function handleGuestAppointment() {
+    window.location.href = '<?= rtrim(BASE_URL, '/') ?>/frontend/pages/login-page.php';
+  }
+
+  /**
+   * Handle appointment form submission for users with incomplete data
+   * Redirects to data-diri page when submit is clicked
+   */
+  function handleIncompleteAppointment() {
+    window.location.href = '<?= rtrim(BASE_URL, '/') ?>/frontend/pages/data-diri.php';
+  }
+</script>
 
 </body>
 

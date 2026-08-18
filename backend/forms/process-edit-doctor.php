@@ -36,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $namaDokter = isset($_POST['nama_dokter']) ? trim($_POST['nama_dokter']) : '';
   $spesialis  = isset($_POST['spesialis']) ? trim($_POST['spesialis']) : '';
   $klinik     = isset($_POST['klinik']) ? trim($_POST['klinik']) : '';
-  $foto       = isset($_POST['foto']) ? trim($_POST['foto']) : '';
 
   $errors = [];
 
@@ -58,6 +57,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   try {
+    $selectStmt = $pdo->prepare('SELECT foto FROM dokter WHERE id = :id LIMIT 1');
+    $selectStmt->execute([':id' => $id]);
+    $existingDoctor = $selectStmt->fetch(PDO::FETCH_ASSOC);
+
+    $foto = $existingDoctor['foto'] ?? '';
+    $uploadDir = __DIR__ . '/../../frontend/assets/img/doctors/';
+
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK && !empty($_FILES['image']['name'])) {
+      $fileTmp = $_FILES['image']['tmp_name'];
+      $fileType = $_FILES['image']['type'] ?? '';
+      $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+
+      if (!in_array($fileType, $allowedTypes, true)) {
+        $_SESSION['error_message'] = 'Format foto tidak didukung. Gunakan JPG, PNG, atau WEBP.';
+        header('Location: ' . BASE_URL . 'admin/dashboard/admin-dashboard.php');
+        exit;
+      }
+
+      $extension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+      $foto = 'doctor_' . time() . '_' . bin2hex(random_bytes(4)) . '.' . $extension;
+      $targetPath = $uploadDir . $foto;
+
+      if (!move_uploaded_file($fileTmp, $targetPath)) {
+        $_SESSION['error_message'] = 'Gagal menyimpan foto dokter baru.';
+        header('Location: ' . BASE_URL . 'admin/dashboard/admin-dashboard.php');
+        exit;
+      }
+
+      $oldFilePath = $uploadDir . $existingDoctor['foto'];
+      if (!empty($existingDoctor['foto']) && file_exists($oldFilePath) && $existingDoctor['foto'] !== $foto) {
+        unlink($oldFilePath);
+      }
+    }
+
     $sql = "UPDATE dokter 
             SET nama_dokter = :nama, 
                 spesialis   = :spesialis, 

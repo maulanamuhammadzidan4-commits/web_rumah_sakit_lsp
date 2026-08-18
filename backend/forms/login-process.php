@@ -55,16 +55,36 @@ if (count($errors) > 0) {
         }
       }
 
+      $profileStmt = $pdo->prepare('
+        SELECT u.full_name, u.telp, u.address,
+               m.id AS medical_profile_id
+        FROM users u
+        LEFT JOIN user_medical_profiles m ON m.user_id = u.user_id
+        WHERE u.user_id = :user_id
+        LIMIT 1
+      ');
+      $profileStmt->execute([':user_id' => $user['user_id']]);
+      $userProfile = $profileStmt->fetch(PDO::FETCH_ASSOC);
+
+      $hasCompletedProfile = false;
+      if ($userProfile) {
+        $hasCompletedProfile = !empty($userProfile['full_name'])
+          && !empty($userProfile['telp'])
+          && !empty($userProfile['address']);
+      }
+
       $_SESSION['user'] = [
         'id'          => $user['user_id'],
         'username'    => $user['username'],
         'email'       => $user['email'],
         'roles'       => $roles,
-        'permissions' => $permissions
+        'permissions' => $permissions,
+        'profile_complete' => $hasCompletedProfile,
       ];
       $_SESSION['username'] = $user['username'];
       $_SESSION['email'] = $user['email'];
       $_SESSION['is_logged_in'] = true;
+      $_SESSION['is_added_data_diri'] = $hasCompletedProfile;
 
       $isAdmin = false;
       foreach ($_SESSION['user']['roles'] as $role) {
@@ -75,6 +95,8 @@ if (count($errors) > 0) {
       }
       if ($isAdmin) {
         $redirectUrl = rtrim(BASE_URL, '/') . '/admin/dashboard/admin-dashboard.php';
+      } else if ($hasCompletedProfile) {
+        $redirectUrl = rtrim(BASE_URL, '/') . '/frontend/pages/profile.php';
       } else {
         $redirectUrl = rtrim(BASE_URL, '/') . '/frontend/pages/data-diri.php';
       }
