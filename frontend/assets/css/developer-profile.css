@@ -1,0 +1,261 @@
+.developer-page {
+  background: #f1f7fc;
+}
+
+.developer-profile {
+  background: #f1f7fc;
+}
+
+.developer-summary {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 30px 34px;
+  background: #ffffff;
+  border: 1px solid #dcebe4;
+  border-top: 4px solid var(--accent-color);
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(6, 95, 44, 0.1);
+}
+
+.developer-summary-icon {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  background: linear-gradient(145deg, #065f2c, #00a651);
+  border-radius: 50%;
+  font-size: 2rem;
+}
+
+.developer-summary-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.developer-summary-content {
+  min-width: 0;
+}
+
+.developer-eyebrow {
+  display: inline-block;
+  margin-bottom: 6px;
+  color: var(--accent-color);
+  font-family: var(--nav-font);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.developer-summary-content h3 {
+  margin: 0 0 14px;
+  font-size: 1.35rem;
+}
+
+.developer-summary-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  color: #5f6f78;
+  font-size: 0.95rem;
+}
+
+.developer-summary-details span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  overflow-wrap: anywhere;
+}
+
+.developer-summary-details i {
+  color: var(--accent-color);
+  font-size: 1rem;
+}
+
+.developer-summary-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  min-width: 150px;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .developer-summary {
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 18px;
+    padding: 24px;
+  }
+
+  .developer-summary-icon {
+    width: 58px;
+    height: 58px;
+    font-size: 1.5rem;
+  }
+
+  .developer-summary-button {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}
+
+.developer-hero {
+  padding: 84px 0 72px;
+  background: linear-gradient(135deg, #065f2c 0%, #00a651 100%);
+  color: #ffffff;
+}
+
+.developer-hero h1,
+.developer-hero p {
+  color: #ffffff;
+}
+
+.developer-hero h1 {
+  max-width: 760px;
+  margin-bottom: 18px;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.08;
+}
+
+.developer-hero p {
+  max-width: 620px;
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.developer-profile-content {
+  padding: 76px 0 96px;
+}
+
+.developer-profile-card {
+  height: 100%;
+  padding: 34px;
+  background: #ffffff;
+  border-left: 4px solid var(--accent-color);
+  box-shadow: 0 14px 40px rgba(6, 95, 44, 0.1);
+}
+
+.developer-profile-photo {
+  width: 150px;
+  height: 150px;
+  display: block;
+  margin-bottom: 24px;
+  object-fit: cover;
+  border: 5px solid #e1f2e9;
+  border-radius: 50%;
+}
+
+.developer-profile-card h2 {
+  margin-bottom: 12px;
+}
+
+.developer-profile-card p {
+  color: #5f6f78;
+}
+
+.developer-data-list {
+  display: grid;
+  gap: 18px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.developer-data-list li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.developer-data-list i {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  background: var(--accent-color);
+  border-radius: 50%;
+  font-size: 1.1rem;
+}
+
+.developer-data-list strong,
+.developer-data-list span {
+  display: block;
+}
+
+.developer-data-list strong {
+  margin-bottom: 3px;
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+}
+
+.developer-data-list span {
+  color: #5f6f78;
+  overflow-wrap: anywhere;
+}
+
+.developer-note {
+  min-height: 100%;
+  padding: 34px;
+  background: #065f2c;
+  color: #ffffff;
+}
+
+.developer-note h2,
+.developer-note p {
+  color: #ffffff;
+}
+
+.developer-note h2 {
+  margin-bottom: 18px;
+}
+
+.developer-note p {
+  margin-bottom: 26px;
+  opacity: 0.88;
+}
+
+.developer-note .btn-get-started {
+  color: #065f2c;
+  background: #ffffff;
+}
+
+.developer-note .btn-get-started:hover {
+  color: #ffffff;
+  background: var(--accent-color);
+}
+
+@media (max-width: 575px) {
+  .developer-profile-card,
+  .developer-note {
+    padding: 26px;
+  }
+
+  .developer-profile-photo {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.btn-get-started {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  min-width: 150px;
+  padding: 10px 16px;
+  color: #ffffff;
+  background: var(--accent-color);
+  border-radius: 4px;
+  font-size: 0.95rem;
+}

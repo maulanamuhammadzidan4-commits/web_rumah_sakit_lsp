@@ -1,7 +1,5 @@
 <?php
-// config.php
-
-// Tentukan BASE_URL sesuai dengan nama folder proyekmu di server/localhost
+// Tentukan BASE_URL sesuai dengan nama folder proyek
 // Jika berada di root domain, cukup isi '/'
 define('BASE_URL', '/web_rumah_sakit/'); 
 

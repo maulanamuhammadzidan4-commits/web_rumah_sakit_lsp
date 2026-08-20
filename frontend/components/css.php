@@ -26,6 +26,7 @@ require_once __DIR__ . '/../../config.php';
 
   <!-- Main CSS File -->
   <link href="<?= BASE_URL ?>frontend/assets/css/main.css" rel="stylesheet">
+  <link href="<?= BASE_URL ?>frontend/assets/css/developer-profile.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Medilab

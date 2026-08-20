@@ -587,6 +587,33 @@ if ($isLoggedIn) {
 
     </section><!-- /Contact Section -->
 
+    <!-- Developer Profile Section -->
+    <section id="developer-profile" class="developer-profile section light-background">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <h2>Profil Developer</h2>
+          <p>Informasi tentang developer</p>
+        </div>
+
+        <div class="developer-summary" data-aos="fade-up" data-aos-delay="100">
+          <div class="developer-summary-icon">
+            <img src="assets/img/dev.jpg" alt="Foto M. Zidan Maulana">
+          </div>
+          <div class="developer-summary-content">
+            <span class="developer-eyebrow">Full stack</span>
+            <h3>M. Zidan Maulana</h3>
+            <div class="developer-summary-details">
+              <span><i class="bi bi-envelope"></i> mzidanmaulana4@gmail.com</span>
+              <span><i class="bi bi-geo-alt"></i> Jl. Desa Argalingga, blok Argalingga, desa Argalingga kec. Argapura kab. Majalengka</span>
+            </div>
+          </div>
+          <a href="pages/developer-profile.html" class="btn-get-started developer-summary-button">
+            Lihat Profil <i class="bi bi-arrow-up-right"></i>
+          </a>
+        </div>
+      </div>
+    </section><!-- /Developer Profile Section -->
+
   </main>
 
 <?php include 'components/footer.php'; ?>

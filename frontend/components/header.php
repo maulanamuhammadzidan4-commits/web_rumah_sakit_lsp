@@ -62,6 +62,7 @@ if (isset($_SESSION['user'])){
           </li>
           <li><a href="<?= BASE_URL; ?>frontend/home.php#doctors">Dokter</a></li>
           <li><a href="<?= BASE_URL; ?>frontend/home.php#contact">Contact</a></li>
+          <li><a href="<?= BASE_URL; ?>frontend/home.php#developer-profile">Developer</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
