@@ -65,11 +65,11 @@ $dashboardUrl = $baseUrl . '/admin/dashboard/admin-dashboard.php';
                         </div>
                     <div>
                         <label for="gallery-title" class="block text-sm font-medium text-gray-700 mb-1">Judul</label>
-                        <input id="gallery-title" type="text" name="title" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        <input id="gallery-title" type="text" name="title" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="Masukkan judul gambar">
                     </div>
                     <div>
                         <label for="gallery-description" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
-                        <textarea id="gallery-description" name="description" rows="3" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
+                        <textarea id="gallery-description" name="description" rows="3" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="Masukkan deskripsi"></textarea>
                     </div>
                     <div class="md:col-span-2 flex justify-end">
                         <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition">
@@ -124,11 +124,11 @@ $dashboardUrl = $baseUrl . '/admin/dashboard/admin-dashboard.php';
                                                         </label>
                                                         <label class="block text-xs font-medium text-gray-700">
                                                             Judul
-                                                            <input type="text" name="title" value="<?= htmlspecialchars($gallery['title'], ENT_QUOTES, 'UTF-8') ?>" required class="w-full mt-1 px-2 py-1.5 border border-gray-300 rounded">
+                                                            <input type="text" name="title" value="<?= htmlspecialchars($gallery['title'], ENT_QUOTES, 'UTF-8') ?>" required class="w-full mt-1 px-2 py-1.5 border border-gray-300 rounded" placeholder="Masukkan judul gambar">
                                                         </label>
                                                         <label class="block text-xs font-medium text-gray-700">
                                                             Deskripsi
-                                                            <textarea name="description" rows="3" required class="w-full mt-1 px-2 py-1.5 border border-gray-300 rounded"><?= htmlspecialchars($gallery['description'], ENT_QUOTES, 'UTF-8') ?></textarea>
+                                                            <textarea name="description" rows="3" required class="w-full mt-1 px-2 py-1.5 border border-gray-300 rounded" placeholder="Masukkan deskripsi gambar"><?= htmlspecialchars($gallery['description'], ENT_QUOTES, 'UTF-8') ?></textarea>
                                                         </label>
                                                         <button type="submit" class="w-full px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded text-xs font-medium">Simpan Perubahan</button>
                                                     </form>

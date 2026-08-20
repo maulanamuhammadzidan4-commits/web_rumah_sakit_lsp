@@ -61,7 +61,12 @@ $dashboardUrl = rtrim(BASE_URL, '/') . '/admin/dashboard/admin-dashboard.php';
             <?php if (!empty($_SESSION['error_message'])): ?><div class="mb-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-800 rounded-r"><?= htmlspecialchars(strip_tags($_SESSION['error_message']), ENT_QUOTES, 'UTF-8') ?></div><?php unset($_SESSION['error_message']); endif; ?>
 
             <section id="tambah-user" class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8" aria-labelledby="add-user-title">
-                <div class="flex items-center gap-3 mb-5"><div class="p-3 bg-blue-50 text-blue-600 rounded-lg"><i class="fas fa-user-plus"></i></div><div><h2 id="add-user-title" class="text-lg font-bold text-gray-800">Tambah Pengguna</h2><p class="text-sm text-gray-500">Buat akun pengguna baru dan tentukan role-nya.</p></div></div>
+                <div class="flex items-center gap-3 mb-5"><div class="p-3 bg-blue-50 text-blue-600 rounded-lg">
+                    <i class="fas fa-user-plus"></i></div><div>
+                        <h2 id="add-user-title" class="text-lg font-bold text-gray-800">Tambah Pengguna</h2>
+                        <p class="text-sm text-gray-500">Buat akun pengguna baru dan tentukan role-nya.</p>
+                    </div>
+                </div>
                 <form action="<?= htmlspecialchars(rtrim(BASE_URL, '/') . '/backend/forms/process-add-user.php', ENT_QUOTES, 'UTF-8') ?>" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
                         <label for="new-user-name" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
@@ -99,7 +104,7 @@ $dashboardUrl = rtrim(BASE_URL, '/') . '/admin/dashboard/admin-dashboard.php';
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
                     <div>
                         <p class="text-sm font-medium text-gray-500">Data Ditampilkan</p>
-                        <p class="text-3xl font-bold text-emerald-600 mt-2">Lengkap</p>
+                        <p class="text-3xl font-bold text-emerald-600 mt-2"><?= number_format(count($usersList)) ?></p>
                     </div>
                     <div class="p-4 bg-emerald-50 text-emerald-600 rounded-xl"><i class="fas fa-table-list text-2xl"></i></div>
                 </div>

@@ -80,7 +80,7 @@ if (isset($_SESSION['user'])){
           <?php if ($is_admin): ?>
             <a class="cta-btn" href="<?= BASE_URL ?>admin/index.php">Admin</a>
           <?php else: ?>
-          <a class="cta-btn" href="<?= BASE_URL; ?>frontend/pages/profile.php">Profil Saya</a>
+          <a class="cta-btn" href="<?= BASE_URL; ?>frontend/pages/profile.php">Profil</a>
           <?php endif; ?>
         <?php else: ?>
           <!-- Tampilan saat User Belum Login -->

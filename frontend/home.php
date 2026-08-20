@@ -64,8 +64,6 @@ if ($isLoggedIn) {
               <h3>RSUD Majalengka</h3>
               <p>
                 RSUD Majalengka adalah rumah sakit daerah yang berkomitmen memberikan pelayanan kesehatan terbaik bagi masyarakat.
-                Dengan fasilitas modern, tenaga medis profesional, dan berbagai layanan spesialis, RSUD Majalengka hadir untuk memastikan perawatan yang berkualitas, aman, dan terjangkau.
-                Kami terus berinovasi untuk meningkatkan mutu layanan demi kesehatan dan kesejahteraan pasien.
               </p>
               <div class="text-center">
                 <a href="#about" class="more-btn"><span>Learn more</span> <i class="bi bi-chevron-right"></i></a>
@@ -124,31 +122,10 @@ if ($isLoggedIn) {
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
             <h3>Tentang kami</h3>
             <p>
-              Kami adalah rumah sakit yang berkomitmen untuk memberikan pelayanan kesehatan terbaik bagi masyarakat. Dengan tenaga medis yang profesional dan fasilitas modern, kami siap membantu Anda dalam menjaga kesehatan dan kesejahteraan.
+              RSUD Majalengka adalah rumah sakit daerah yang berkomitmen memberikan pelayanan kesehatan terbaik bagi masyarakat. Dengan fasilitas modern, tenaga medis profesional, dan berbagai layanan spesialis, RSUD Majalengka hadir untuk memastikan perawatan yang berkualitas, aman, dan terjangkau.
             </p>
-            <ul>
-              <li>
-                <i class="fa-solid fa-vial-circle-check"></i>
-                <div>
-                  <h5>Lab terverifikasi</h5>
-                  <p>Labolatorium kami telah tersertifikasi oleh lembaga terkemuka.</p>
-                </div>
-              </li>
-              <li>
-                <i class="fa-solid fa-pump-medical"></i>
-                <div>
-                  <h5>Steril</h5>
-                  <p>Kami memastikan setiap kamar pasien, ruang perawatan, dan fasilitas medis lainnya tetap steril dan higienis.</p>
-                </div>
-              </li>
-              <li>
-                <i class="fa-solid fa-heart-circle-xmark"></i>
-                <div>
-                  <h5>Menerima Kritik & saran</h5>
-                  <p>Kami terbuka terhadap kritik dan saran dari pasien untuk terus meningkatkan pelayanan kami.</p>
-                </div>
-              </li>
-            </ul>
+            <p>Kami terus berinovasi untuk meningkatkan mutu layanan demi kesehatan dan kesejahteraan pasien.</p>
+            <p>Direktur RSUD Majalengka</p>
           </div>
 
         </div>

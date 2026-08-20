@@ -79,7 +79,7 @@ if (!$user) {
           <div class="col-lg-8">
             <div class="custom-form-card p-4">
               <div class="section-title text-center">
-                <h2>Profil Saya</h2>
+                <h2>Profil</h2>
                 <p>Detail data diri dan riwayat medis Anda.</p>
               </div>
 
