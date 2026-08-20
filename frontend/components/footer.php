@@ -68,7 +68,7 @@ require_once __DIR__ . '/../../config.php';
 
   <!-- Copyright Section -->
   <div class="container copyright text-center mt-4">
-    <p>&copy; 2025 RSUD Majalengka</p>
+    <p>&copy; 2026 RSUD Majalengka</p>
   </div>
 
   <!-- Scroll to top button (Jika ingin ditaruh di dalam footer atau tetap pakai milik bawaan) -->
