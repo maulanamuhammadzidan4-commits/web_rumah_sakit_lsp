@@ -9,7 +9,7 @@ require_once __DIR__ . '/../../config.php';
       
       <!-- Kolom 1: Logo, Alamat, Kontak -->
       <div class="col-lg-4 col-md-6 footer-about">
-        <a href="index.html" class="logo d-flex align-items-center mb-3">
+        <a href="<?= BASE_URL ?>frontend/home.php" class="logo d-flex align-items-center mb-3">
           <!-- Kamu bisa ganti SVGs/Img dengan logo RSUD asli jika ada -->
           <img src="<?= BASE_URL; ?>frontend/assets/img/logo.png" alt="logo" class="logo-img me-2">
           <div class="brand-text">
@@ -38,10 +38,8 @@ require_once __DIR__ . '/../../config.php';
       <div class="col-lg-2 col-md-3 footer-links">
         <h4 class="title-with-line">Layanan</h4>
         <ul>
-          <li><a href="#">Rawat Inap</a></li>
-          <li><a href="#">Spesialis</a></li>
-          <li><a href="#">Layanan Unggulan</a></li>
-          <li><a href="#">Unit Gawat Darurat</a></li>
+          <li><a href="<?= BASE_URL ?>frontend/pages/darurat.html">IGD</a></li>
+          <li><a href="<?= BASE_URL ?>frontend/home.php#appointment">Janji Temu</a></li>
         </ul>
       </div>
 
@@ -49,10 +47,8 @@ require_once __DIR__ . '/../../config.php';
       <div class="col-lg-2 col-md-3 footer-links">
         <h4 class="title-with-line">Menu</h4>
         <ul>
-          <li><a href="<?= BASE_URL ?>frontend/home.php#doctors">Cari Dokter</a></li>
-          <li><a href="#">Berita Terkini</a></li>
-          <li><a href="#">PPID</a></li>
-          <li><a href="#">Informasi Pelayanan</a></li>
+          <li><a href="<?= BASE_URL ?>frontend/home.php#doctors">Dokter</a></li>
+          <li><a href="<?= BASE_URL ?>frontend/home.php#gallery ">Galeri</a></li>
         </ul>
       </div>
 

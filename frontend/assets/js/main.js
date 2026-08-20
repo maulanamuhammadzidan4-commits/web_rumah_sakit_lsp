@@ -47,6 +47,23 @@
   });
 
   /**
+   * Activate clinic tabs without allowing the pane hash to control scrolling.
+   */
+  document.querySelectorAll('#navmenu a.clinic-tab-link').forEach(link => {
+    link.addEventListener('click', (event) => {
+      const clinicSection = document.querySelector('#klinik');
+      const tabLink = document.querySelector(`.nav-tabs a[href="${link.hash}"]`);
+
+      if (!clinicSection || !tabLink) return;
+
+      event.preventDefault();
+      tabLink.click();
+      clinicSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', link.hash);
+    });
+  });
+
+  /**
    * Toggle mobile nav dropdowns
    */
   document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
@@ -78,13 +95,15 @@
       window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
     }
   }
-  scrollTop.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+  if (scrollTop) {
+    scrollTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
-  });
+  }
 
   window.addEventListener('load', toggleScrollTop);
   document.addEventListener('scroll', toggleScrollTop);
@@ -150,6 +169,14 @@
       if (document.querySelector(window.location.hash)) {
         setTimeout(() => {
           let section = document.querySelector(window.location.hash);
+          const clinicSection = section.closest('#klinik');
+
+          if (clinicSection) {
+            const tabLink = document.querySelector(`.nav-tabs a[href="${window.location.hash}"]`);
+            if (tabLink) tabLink.click();
+            section = clinicSection;
+          }
+
           let scrollMarginTop = getComputedStyle(section).scrollMarginTop;
           window.scrollTo({
             top: section.offsetTop - parseInt(scrollMarginTop),

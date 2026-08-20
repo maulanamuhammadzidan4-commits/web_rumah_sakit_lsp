@@ -157,100 +157,6 @@ if ($isLoggedIn) {
 
     </section><!-- /About Section -->
 
-    <!-- Services Section -->
-    <section id="services" class="services section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Pelayanan</h2>
-        <p>Kami menyediakan pelayanan-pelayanan berikut:</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item  position-relative">
-              <div class="icon">
-                <i class="fas fa-heartbeat"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Kardiologi</h3>
-              </a>
-              <p>Kami menyediakan layanan medis lengkap untuk kesehatan jantung dan sistem sirkulasi dengan tenaga medis yang berpengalaman dan fasilitas modern.</p>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fas fa-pills"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Neurology</h3>
-              </a>
-              <p>Kami menyediakan layanan medis lengkap untuk kesehatan sistem saraf dengan tenaga medis yang berpengalaman dan fasilitas modern.</p>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fas fa-hospital-user"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Hepatology</h3>
-              </a>
-              <p>Kami menyediakan layanan medis lengkap untuk kesehatan hati dengan tenaga medis yang berpengalaman dan fasilitas modern.</p>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fas fa-dna"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Pediatrics</h3>
-              </a>
-              <p>Kami juga menyediakan fasilitas untuk pelayanan kesehatan anak (0 hingga 18 tahun) dengan tenaga medis yang berpengalaman dan ramah.</p>
-              <a href="#" class="stretched-link"></a>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fas fa-wheelchair"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>Geriatrics</h3>
-              </a>
-              <p>Kami juga menyediakan pelayanan kesehatan untuk lansia dengan tenaga medis yang berpengalaman dan fasilitas modern.</p>
-              <a href="#" class="stretched-link"></a>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fas fa-notes-medical"></i>
-              </div>
-              <a href="#" class="stretched-link">
-                <h3>General Medicine</h3>
-              </a>
-              <p>Kami menyediakan layanan medis umum untuk mendiagnosis dan mengobati berbagai kondisi kesehatan lainnya dengan tenaga medis profesional dan fasilitas modern.</p>
-              <a href="#" class="stretched-link"></a>
-            </div>
-          </div><!-- End Service Item -->
-
-        </div>
-
-      </div>
-
-    </section><!-- /Services Section -->
-
     <!-- Appointment Section -->
     <section id="appointment" class="appointment section">
 
@@ -374,11 +280,7 @@ if ($isLoggedIn) {
           </form>
         <?php else: ?>
           <!-- FORM UNTUK USER YANG SUDAH LOGIN DAN DATA DIRI LENGKAP -->
-          <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
-            <!-- Hidden inputs untuk nama, email, telepon -->
-            <input type="hidden" name="name" id="hidden_name" value="<?= htmlspecialchars($userData['full_name'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-            <input type="hidden" name="email" id="hidden_email" value="<?= htmlspecialchars($userData['email'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-            <input type="hidden" name="phone" id="hidden_phone" value="<?= htmlspecialchars($userData['telp'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+          <form action="../backend/forms/process-add-appointment.php" method="post" role="form" class="php-email-form">
 
             <!-- Display user info as read-only -->
             <div class="row">
@@ -399,11 +301,11 @@ if ($isLoggedIn) {
             <div class="row">
               <div class="col-md-4 form-group mt-3">
                 <label for="date_logged_in" class="form-label">Tanggal & Waktu <span class="text-danger">*</span></label>
-                <input type="datetime-local" name="date" class="form-control datepicker" id="date_logged_in" placeholder="Appointment Date" required="">
+                <input type="datetime-local" name="tanggal_temu" class="form-control datepicker" id="date_logged_in" placeholder="Appointment Date" required="">
               </div>
               <div class="col-md-4 form-group mt-3">
                 <label for="department_logged_in" class="form-label">Klinik <span class="text-danger">*</span></label>
-                <select name="department" id="department_logged_in" class="form-select" required="">
+                <select name="klinik" id="department_logged_in" class="form-select" required="">
                   <option value="">Pilih Klinik</option>
                   <option value="Klinik Jantung">Klinik Jantung</option>
                   <option value="Klinik Jiwa">Klinik Jiwa</option>
@@ -414,10 +316,10 @@ if ($isLoggedIn) {
               </div>
               <div class="col-md-4 form-group mt-3">
                 <label for="doctor_logged_in" class="form-label">Dokter <span class="text-danger">*</span></label>
-                <select name="doctor" id="doctor_logged_in" class="form-select" required="">
+                <select name="id_dokter" id="doctor_logged_in" class="form-select" required="">
                   <option value="">Pilih Dokter</option>
                   <?php foreach ($doctors as $doctor): ?>
-                  <option value="<?= htmlspecialchars($doctor['nama_dokter']); ?>"><?= htmlspecialchars($doctor['nama_dokter']); ?></option>
+                  <option value="<?= htmlspecialchars($doctor['id']); ?>"><?= htmlspecialchars($doctor['nama_dokter']); ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>
@@ -566,7 +468,6 @@ if ($isLoggedIn) {
               </div>
             </div>
           </div><!-- End Team Member -->
-        
         <?php endforeach; ?>
 
         </div>
@@ -614,7 +515,7 @@ if ($isLoggedIn) {
       </div><!-- End Section Title -->
 
       <div class="mb-5" data-aos="fade-up" data-aos-delay="200">
-        <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.4725866063422!2d108.23094787399657!3d-6.833801793164202!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f2f598beec1fd%3A0x60127300a96f15f6!2sRSUD%20Majalengka!5e0!3m2!1sen!2sid!4v1787096891502!5m2!1sen!2sid" width="100%" height="270px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div><!-- End Google Maps -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -626,7 +527,7 @@ if ($isLoggedIn) {
               <i class="bi bi-geo-alt flex-shrink-0"></i>
               <div>
                 <h3>Lokasi</h3>
-                <p>Jl. Pulang No. 05, Majalengka</p>
+                <p>Jl. Kesehatan No. 7 Majalengka Jawa Barat</p>
               </div>
             </div><!-- End Info Item -->
 
@@ -634,7 +535,7 @@ if ($isLoggedIn) {
               <i class="bi bi-telephone flex-shrink-0"></i>
               <div>
                 <h3>Hubungi Kami</h3>
-                <p>+62 856-1234-5678</p>
+                <p>+6233281043</p>
               </div>
             </div><!-- End Info Item -->
 
@@ -642,7 +543,7 @@ if ($isLoggedIn) {
               <i class="bi bi-envelope flex-shrink-0"></i>
               <div>
                 <h3>Email Us</h3>
-                <p>lokanandars1@gmail.com</p>
+                <p>info@rsudmajalengka.co.id</p>
               </div>
             </div><!-- End Info Item -->
 

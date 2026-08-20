@@ -45,22 +45,19 @@ if (isset($_SESSION['user'])){
         <ul>
           <li><a href="<?= BASE_URL; ?>frontend/home.php#hero" class="active">Home<br></a></li>
           <li><a href="<?= BASE_URL; ?>frontend/home.php#about">About</a></li>
-          <li class="dropdown"><a href="#services"><span>Layanan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="#"><span>Layanan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Artikel kesehatan</a></li>
+              <li><a href="<?= BASE_URL; ?>frontend/home.php#gallery">Gallery</a></li>
               <li class="dropdown"><a href="<?= BASE_URL; ?>frontend/home.php#klinik"><span>Klinik spesialis</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
-                  <li><a href="<?= BASE_URL; ?>frontend/home.php#klinik-tab-1">Klinik Jantung</a></li>
-                  <li><a href="<?= BASE_URL; ?>frontend/home.php#klinik-tab-2">Klinik Jiwa</a></li>
-                  <li><a href="<?= BASE_URL; ?>frontend/home.php#klinik-tab-3">Klinik Paru</a></li>
-                  <li><a href="<?= BASE_URL; ?>frontend/home.php#klinik-tab-4">Klinik THT</a></li>
-                  <li><a href="<?= BASE_URL; ?>frontend/home.php#klinik-tab-5">Klinik mata</a></li>
+                  <li><a href="<?= BASE_URL; ?>frontend/home.php#klinik-tab-1" class="clinic-tab-link">Klinik Jantung</a></li>
+                  <li><a href="<?= BASE_URL; ?>frontend/home.php#klinik-tab-2" class="clinic-tab-link">Klinik Jiwa</a></li>
+                  <li><a href="<?= BASE_URL; ?>frontend/home.php#klinik-tab-3" class="clinic-tab-link">Klinik Paru</a></li>
+                  <li><a href="<?= BASE_URL; ?>frontend/home.php#klinik-tab-4" class="clinic-tab-link">Klinik THT</a></li>
+                  <li><a href="<?= BASE_URL; ?>frontend/home.php#klinik-tab-5" class="clinic-tab-link">Klinik mata</a></li>
                 </ul>
               </li>
-              <li><a href="#">Chat Dokter</a></li>
-              <li><a href="#">Jadwal praktek</a></li>
-              <li><a href="#">Obat</a></li>
-              <li><a href="<?= BASE_URL; ?>pages/room.html">Kamar</a></li>
+              <li><a href="<?= BASE_URL; ?>frontend/pages/darurat.html">IGD</a></li>
             </ul>
           </li>
           <li><a href="<?= BASE_URL; ?>frontend/home.php#doctors">Dokter</a></li>
@@ -72,9 +69,9 @@ if (isset($_SESSION['user'])){
       <!-- Header Action Buttons (IGD & Janji Temu) -->
       <div class="header-action-btns d-flex align-items-center gap-2 ms-3 order-2 order-xl-last">
         <!-- Tombol IGD -->
-        <a class="btn-igd" href="<?= BASE_URL; ?>pages/igd.html">
+        <a class="btn-igd" href="<?= BASE_URL; ?>frontend/pages/darurat.html">
           <i class="bi bi-telephone-fill me-1"></i>
-          <span>IGD</span>
+          <span>DARURAT</span>
         </a>
 
         <?php if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true): ?>
@@ -82,12 +79,8 @@ if (isset($_SESSION['user'])){
           <?php if ($is_admin): ?>
             <a class="cta-btn" href="<?= BASE_URL ?>admin/index.php">Admin</a>
           <?php else: ?>
-          <span class="navbar-text me-2">
-            Halo, <strong><?= htmlspecialchars($_SESSION['user']['username'], ENT_QUOTES, 'UTF-8'); ?></strong>
-          </span>
           <a class="cta-btn" href="<?= BASE_URL; ?>frontend/pages/profile.php">Profil Saya</a>
           <?php endif; ?>
-          <a class="cta-btn btn-danger" href="<?= BASE_URL; ?>backend/forms/logout.php">Logout</a>
         <?php else: ?>
           <!-- Tampilan saat User Belum Login -->
           <a class="cta-btn" id="login" href="<?= BASE_URL ?>frontend/pages/login-page.php">Login</a>

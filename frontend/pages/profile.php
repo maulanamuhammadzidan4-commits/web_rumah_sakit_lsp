@@ -31,6 +31,9 @@ if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
   exit;
 }
 
+$successMessage = $_SESSION['success_message'] ?? null;
+unset($_SESSION['success_message']);
+
 $userId = (int)($_SESSION['user']['id'] ?? 0);
 $telpColumnExists = columnExists($pdo, 'users', 'telp');
 
@@ -46,6 +49,14 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 $medicalStmt = $pdo->prepare('SELECT blood_type, medical_history, updated_at FROM user_medical_profiles WHERE user_id = :user_id LIMIT 1');
 $medicalStmt->execute([':user_id' => $userId]);
 $medical = $medicalStmt->fetch(PDO::FETCH_ASSOC);
+
+$appointmentStmt = $pdo->prepare('SELECT a.klinik, a.tanggal_temu, d.nama_dokter
+  FROM appointments a
+  LEFT JOIN dokter d ON d.id = a.id_dokter
+  WHERE a.id_user = :user_id
+  ORDER BY a.tanggal_temu DESC, a.id_appointment DESC');
+$appointmentStmt->execute([':user_id' => $userId]);
+$appointments = $appointmentStmt->fetchAll(PDO::FETCH_ASSOC);
 
 if (!$user) {
   echo 'Data user tidak ditemukan.';
@@ -122,6 +133,42 @@ if (!$user) {
                 </div>
               </div>
             </div>
+
+            <div class="custom-form-card p-4 mt-4">
+              <div class="section-title text-center">
+                <h2>Janji Temu Saya</h2>
+                <p>Daftar jadwal konsultasi yang telah Anda buat.</p>
+              </div>
+
+              <?php if ($appointments): ?>
+                <div class="table-responsive">
+                  <table class="table align-middle mb-0">
+                    <thead>
+                      <tr>
+                        <th>Dokter</th>
+                        <th>Klinik</th>
+                        <th>Tanggal & Waktu</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach ($appointments as $appointment): ?>
+                        <tr>
+                          <td><?= htmlspecialchars($appointment['nama_dokter'] ?? '-', ENT_QUOTES, 'UTF-8'); ?></td>
+                          <td><?= htmlspecialchars($appointment['klinik'] ?? '-', ENT_QUOTES, 'UTF-8'); ?></td>
+                          <td><?= htmlspecialchars(!empty($appointment['tanggal_temu']) ? date('d M Y H:i', strtotime($appointment['tanggal_temu'])) : '-', ENT_QUOTES, 'UTF-8'); ?></td>
+                        </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+                  </table>
+                </div>
+              <?php else: ?>
+                <p class="text-center text-muted mb-0">Belum ada janji temu.</p>
+              <?php endif; ?>
+            </div>
+
+            <div class="text-center mt-3">
+              <a class="cta-btn profile-logout-btn" href="<?= BASE_URL; ?>backend/forms/logout.php">Logout</a>
+            </div>
           </div>
         </div>
       </div>
@@ -129,7 +176,45 @@ if (!$user) {
   </main>
 
 <?php include __DIR__ . '/../components/footer.php'; ?>
+
+<?php if ($successMessage): ?>
+  <div class="modal fade" id="appointmentSuccessModal" tabindex="-1" aria-labelledby="appointmentSuccessModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="appointmentSuccessModalLabel">Janji Temu Berhasil</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center">
+            <i class="bi bi-check-circle-fill text-success fs-1" aria-hidden="true"></i>
+            <p class="mt-3 mb-0"><?= htmlspecialchars($successMessage, ENT_QUOTES, 'UTF-8'); ?></p>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <noscript>
+    <div class="container mt-3">
+      <div class="alert alert-success" role="alert"><?= htmlspecialchars($successMessage, ENT_QUOTES, 'UTF-8'); ?></div>
+    </div>
+  </noscript>
+<?php endif; ?>
+
 <div id="preloader"></div>
 <?php include __DIR__ . '/../components/js.php'; ?>
+<?php if ($successMessage): ?>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const successModal = document.getElementById('appointmentSuccessModal');
+      if (successModal && typeof bootstrap !== 'undefined') {
+        bootstrap.Modal.getOrCreateInstance(successModal).show();
+      }
+    });
+  </script>
+<?php endif; ?>
 </body>
 </html>

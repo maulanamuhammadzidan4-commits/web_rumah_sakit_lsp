@@ -302,7 +302,7 @@ h6 {
 .header .logo .title-main {
   font-size: 18px;
   font-weight: 700;
-  color: #00a651; /* Warna hijau RSUD */
+  color: #00a651; /* Warna hijau RSUD btn-igd */
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -418,12 +418,6 @@ h6 {
 
 .scrolled .header {
   box-shadow: 0px 0 18px rgba(0, 0, 0, 0.1);
-}
-
-.scrolled .header .topbar {
-  height: 0;
-  visibility: hidden;
-  overflow: hidden;
 }
 
 /*--------------------------------------------------------------
@@ -1630,11 +1624,15 @@ section,
 .doctors .team-member .pic {
   overflow: hidden;
   width: 150px;
+  height: 150px;
   border-radius: 50%;
   flex-shrink: 0;
 }
 
 .doctors .team-member .pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: ease-in-out 0.3s;
 }
 
@@ -1938,11 +1936,15 @@ section,
 --------------------------------------------------------------*/
 .gallery .gallery-item {
   overflow: hidden;
+  aspect-ratio: 4 / 3;
   border-right: 3px solid var(--background-color);
   border-bottom: 3px solid var(--background-color);
 }
 
 .gallery .gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: all ease-in-out 0.4s;
 }
 
@@ -2086,6 +2088,28 @@ section,
   transform: translateY(-2px);
 }
 
+.profile-logout-btn,
+.profile-logout-btn:focus {
+  display: inline-block;
+  padding: 12px 40px;
+  border: 1px solid #dc3545;
+  border-radius: 50px;
+  background-color: transparent;
+  color: #dc3545;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.profile-logout-btn:hover,
+.profile-logout-btn:focus-visible {
+  background-color: #bb2d3b;
+  border-color: #bb2d3b;
+  color: #ffffff;
+}
+
 @media (max-width: 575.98px) {
   .custom-form-card {
     padding: 20px 15px;
@@ -2113,4 +2137,191 @@ section,
 
 .data-diri-bg .section-title p {
   color: color-mix(in srgb, var(--default-color), transparent 10%);
+}
+
+/*--------------------------------------------------------------
+# Emergency Assistance Page
+--------------------------------------------------------------*/
+.igd-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f1f7fc 0%, #ffffff 55%, #e8f6ef 100%);
+}
+
+.igd-page main {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 48px 0;
+}
+
+.igd-page .container {
+  max-width: 760px;
+}
+
+.igd-card {
+  background: var(--surface-color);
+  border-top: 5px solid #dc3545;
+  border-radius: 10px;
+  box-shadow: 0 10px 35px rgba(6, 95, 44, 0.12);
+  animation: fadeInUp 0.7s ease-out both;
+}
+
+.igd-card .card-body {
+  padding: 40px;
+}
+
+.igd-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.igd-icon {
+  width: 58px;
+  height: 58px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #ffffff;
+  background: #dc3545;
+  border-radius: 50%;
+  font-size: 26px;
+}
+
+.igd-eyebrow {
+  margin: 0 0 4px;
+  color: var(--accent-color);
+  font-family: var(--nav-font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.igd-page .card-title {
+  margin: 0;
+  color: var(--heading-color);
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.igd-page .card-text {
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  margin-bottom: 0;
+}
+
+.emergency-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.emergency-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  border: 1px solid color-mix(in srgb, #dc3545, transparent 65%);
+  border-radius: 6px;
+  color: #8f1d14;
+  background: #fff7f6;
+  font-family: var(--nav-font);
+  font-weight: 700;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+.emergency-link:nth-child(1) { animation-delay: 0.1s; }
+.emergency-link:nth-child(2) { animation-delay: 0.16s; }
+.emergency-link:nth-child(3) { animation-delay: 0.22s; }
+.emergency-link:nth-child(4) { animation-delay: 0.28s; }
+.emergency-link:nth-child(5) { animation-delay: 0.34s; }
+
+.emergency-link i {
+  margin-right: 8px;
+}
+
+.emergency-link:hover,
+.emergency-link:focus-visible {
+  color: #8f1d14;
+  background: #fde8e6;
+  box-shadow: 0 6px 16px rgba(220, 53, 69, 0.15);
+  transform: translateY(-2px);
+}
+
+.emergency-link-primary {
+  color: #ffffff;
+  background: #dc3545;
+  border-color: #dc3545;
+  animation: fadeInUp 0.5s ease-out both, emergencyPulse 2.2s ease-in-out 1.2s infinite;
+}
+
+.emergency-link-primary:hover,
+.emergency-link-primary:focus-visible {
+  color: #ffffff;
+  background: #bb2d3b;
+}
+
+.phone-number {
+  white-space: nowrap;
+}
+
+.emergency-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: center;
+  margin-top: 8px;
+  padding: 8px 14px;
+  color: color-mix(in srgb, var(--default-color), transparent 35%);
+  font-family: var(--nav-font);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.emergency-home-link:hover,
+.emergency-home-link:focus-visible {
+  color: var(--accent-color);
+}
+
+.emergency-home-link i {
+  font-size: 15px;
+}
+
+@keyframes emergencyPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.35); }
+  50% { box-shadow: 0 0 0 8px rgba(220, 53, 69, 0); }
+}
+
+@media (max-width: 575.98px) {
+  .igd-page main {
+    padding: 24px 0;
+  }
+
+  .igd-card .card-body {
+    padding: 28px 20px;
+  }
+
+  .igd-page .card-title {
+    font-size: 26px;
+  }
+
+  .emergency-link {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .igd-card,
+  .emergency-link,
+  .emergency-link-primary {
+    animation: none;
+    transition: none;
+  }
 }

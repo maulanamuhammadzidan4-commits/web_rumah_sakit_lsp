@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../config.php';
 require_once __DIR__ . '/../../backend/config/database.php';
 
 #---------------------------------------------------
-# 1. CEK AUTENTIKASI & OTORISASI (RBAC)            |
+# 1. CEK AUTENTIKASI & OTORISASI                   |
 #---------------------------------------------------
 if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
     header('Location: ' . rtrim(BASE_URL, '/') . '/frontend/pages/login-page.php');
@@ -54,25 +54,26 @@ try {
         "SELECT a.id_appointment AS id,
                 u.username AS nama_pasien,
                 d.nama_dokter,
-                a.klinik
-         FROM appointments a
-         LEFT JOIN users u ON u.user_id = a.id_user
-         LEFT JOIN dokter d ON d.id = a.id_dokter
-         ORDER BY a.id_appointment DESC
-         LIMIT 5"
+                a.klinik,
+                a.tanggal_temu
+          FROM appointments a
+          LEFT JOIN users u ON u.user_id = a.id_user
+          LEFT JOIN dokter d ON d.id = a.id_dokter
+          ORDER BY a.id_appointment DESC
+          LIMIT 5"
     )->fetchAll(PDO::FETCH_ASSOC);
 
     $doctorsList = $pdo->query(
         "SELECT id, nama_dokter, spesialis, klinik, foto
-         FROM dokter
-         ORDER BY id DESC
-         LIMIT 10"
+          FROM dokter
+          ORDER BY id DESC
+          LIMIT 10"
     )->fetchAll(PDO::FETCH_ASSOC);
 
     $rolesList = $pdo->query(
         "SELECT id, role_name
-         FROM roles
-         ORDER BY id ASC"
+          FROM roles
+          ORDER BY id ASC"
     )->fetchAll(PDO::FETCH_ASSOC);
 
     $usersList = $pdo->query(
@@ -81,17 +82,17 @@ try {
                 u.email,
                 MIN(r.id) AS primary_role_id,
                 GROUP_CONCAT(DISTINCT r.role_name ORDER BY r.role_name SEPARATOR ', ') AS roles_list
-         FROM users u
-         LEFT JOIN user_roles ur ON ur.user_id = u.user_id
-         LEFT JOIN roles r ON r.id = ur.role_id
-         GROUP BY u.user_id, u.username, u.email
-         ORDER BY u.user_id DESC"
+          FROM users u
+          LEFT JOIN user_roles ur ON ur.user_id = u.user_id
+          LEFT JOIN roles r ON r.id = ur.role_id
+          GROUP BY u.user_id, u.username, u.email
+          ORDER BY u.user_id DESC"
     )->fetchAll(PDO::FETCH_ASSOC);
 
     $galleryList = $pdo->query(
         "SELECT id, file_name, title, description
-         FROM gallery
-         ORDER BY id DESC"
+          FROM gallery
+          ORDER BY id DESC"
     )->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     error_log("Error fetching admin stats: " . $e->getMessage());
@@ -176,47 +177,7 @@ unset($_SESSION['success_message'], $_SESSION['error_message']);
 <body class="bg-gray-100 font-sans antialiased">
     <div class="min-h-screen flex flex-col md:flex-row">
 
-        <!-- SIDEBAR -->
-        <aside class="w-full md:w-64 bg-slate-800 text-white flex-shrink-0">
-            <div class="p-6 border-b border-slate-700">
-                <h1 class="text-xl font-bold tracking-wider text-emerald-400">ADMIN PANEL</h1>
-                <p class="text-xs text-slate-400 mt-1">Sistem Manajemen Rumah Sakit</p>
-            </div>
-            <nav class="p-4 space-y-2">
-                <a href="#dashboard-section" class="flex items-center space-x-3 px-4 py-3 bg-emerald-600 rounded-lg text-white font-medium">
-                    <i class="fas fa-chart-line w-5"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="#users-section" class="flex items-center space-x-3 px-4 py-3 text-slate-300 hover:bg-slate-700 rounded-lg transition">
-                    <i class="fas fa-users w-5"></i>
-                    <span>Kelola User</span>
-                </a>
-                <a href="#gallery-section" class="flex items-center space-x-3 px-4 py-3 text-slate-300 hover:bg-slate-700 rounded-lg transition">
-                    <i class="fas fa-images w-5"></i>
-                    <span>Kelola Galeri</span>
-                </a>
-                <a href="#doctors-section" class="flex items-center space-x-3 px-4 py-3 text-slate-300 hover:bg-slate-700 rounded-lg transition">
-                    <i class="fas fa-user-md w-5"></i>
-                    <span>Kelola Dokter</span>
-                </a>
-                <a href="#appointments-section" class="flex items-center space-x-3 px-4 py-3 text-slate-300 hover:bg-slate-700 rounded-lg transition">
-                    <i class="fas fa-calendar-check w-5"></i>
-                    <span>Janji Temu</span>
-                </a>
-                <div class="pt-6 border-t border-slate-700">
-                    <a href="<?= htmlspecialchars(rtrim(BASE_URL, '/') . '/backend/forms/logout.php', ENT_QUOTES, 'UTF-8'); ?>"
-                        class="flex items-center space-x-3 px-4 py-3 text-red-400 hover:bg-slate-700 rounded-lg transition">
-                        <i class="fas fa-sign-out-alt w-5"></i>
-                        <span>Keluar</span>
-                    </a>
-                    <a href="<?= htmlspecialchars(rtrim(BASE_URL, '/') . '/frontend/home.php', ENT_QUOTES, 'UTF-8'); ?>"
-                        class="flex items-center space-x-3 px-4 py-3 text-blue-400 hover:bg-slate-700 rounded-lg transition">
-                        <i class="fas fa-home w-5"></i>
-                        <span>Halaman Depan</span>
-                    </a>
-                </div>
-            </nav>
-        </aside>
+        <?php include __DIR__ . '/components/sidebar.php'; ?>
 
         <!-- MAIN CONTENT -->
         <main class="flex-1 p-6 md:p-10" id="dashboard-section">
@@ -263,10 +224,10 @@ unset($_SESSION['success_message'], $_SESSION['error_message']);
 
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
                     <div>
-                        <p class=\"text-sm font-medium text-gray-500\">Janji Temu</p>
-                        <p class=\"text-3xl font-bold text-gray-800 mt-2\"><?= number_format($totalAppointments) ?></p>
+                        <p class="text-sm font-medium text-gray-500\">Janji Temu</p>
+                        <p class="text-3xl font-bold text-gray-800 mt-2\"><?= number_format($totalAppointments) ?></p>
                     </div>
-                    <div class=\"p-4 bg-purple-50 text-purple-600 rounded-xl\"><i class=\"fas fa-calendar-check text-2xl\"></i></div>
+                    <div class="p-4 bg-purple-50 text-purple-600 rounded-xl\"><i class="fas fa-calendar-check text-2xl"></i></div>
                 </div>
             </div>
 
@@ -410,10 +371,6 @@ unset($_SESSION['success_message'], $_SESSION['error_message']);
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8" id="appointments-section">
                 <div class="flex items-center justify-between mb-5">
                     <h3 class="text-lg font-bold text-gray-800">Daftar Janji Temu</h3>
-                    <button type="button" onclick="openAppointmentModal()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm rounded-lg transition flex items-center space-x-2">
-                        <i class="fas fa-plus w-4"></i>
-                        <span>Tambah Janji Temu</span>
-                    </button>
                 </div>
 
                 <div class="overflow-x-auto">
@@ -424,6 +381,7 @@ unset($_SESSION['success_message'], $_SESSION['error_message']);
                                 <th class="py-3 px-3">Pasien</th>
                                 <th class="py-3 px-3">Dokter</th>
                                 <th class="py-3 px-3">Klinik</th>
+                                <th class="py-3 px-3">Tanggal & Waktu</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100 text-sm text-gray-600">
@@ -440,11 +398,14 @@ unset($_SESSION['success_message'], $_SESSION['error_message']);
                                         <td class="py-3 px-3 text-gray-600">
                                             <?= htmlspecialchars($item['klinik'] ?? '-', ENT_QUOTES, 'UTF-8') ?>
                                         </td>
+                                        <td class="py-3 px-3 text-gray-600">
+                                            <?= htmlspecialchars(!empty($item['tanggal_temu']) ? date('d M Y H:i', strtotime($item['tanggal_temu'])) : '-', ENT_QUOTES, 'UTF-8') ?>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="4" class="py-4 text-center text-gray-400 italic">Belum ada data janji temu.</td>
+                                    <td colspan="5" class="py-4 text-center text-gray-400 italic">Belum ada data janji temu.</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
@@ -616,7 +577,7 @@ unset($_SESSION['success_message'], $_SESSION['error_message']);
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Judul</label>
                     <input type="text" id="edit_gallery_title" name="title" required
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                 </div>
 
                 <div>
@@ -650,19 +611,25 @@ unset($_SESSION['success_message'], $_SESSION['error_message']);
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Nama Dokter</label>
                     <input type="text" name="nama_dokter" required placeholder="dr. Ahmad Fajar, Sp.PD"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Spesialisasi</label>
                     <input type="text" name="spesialis" required placeholder="Spesialis Penyakit Dalam"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal & Waktu</label>
+                    <input type="datetime-local" name="tanggal_temu" required
+                          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Klinik</label>
                     <input type="text" name="klinik" placeholder="Klinik Jantung"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                 </div>
 
                 <div>
